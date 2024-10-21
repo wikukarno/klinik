@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('pasien', function (Blueprint $table) {
             $table->id('id_pasien', 12);
-            $table->integer('id_layanan', 12)->unsigned();
+            $table->string('id_layanan', 12);
             $table->char('nik_pasien', 16)->unique();
-            $table->char('no_bpjs', 13)->unique()->nullable();
+            $table->char('no_bpjs', 13)->unique();
 
             $table->string('nama_pasien', 50);
-            $table->integer('no_hp_pasien', 15);
+            $table->string('no_hp_pasien', 15)->unique();
             $table->enum('jenis_kelamin', ['L', 'P']);
 
             $table->date('tanggal_lahir');
