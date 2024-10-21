@@ -18,7 +18,7 @@ return new class extends Migration
             $table->char('no_bpjs', 13)->unique()->nullable();
 
             $table->string('nama_pasien', 50);
-            $table->int('no_hp_pasien', 15);
+            $table->integer('no_hp_pasien', 15);
             $table->enum('jenis_kelamin', ['L', 'P']);
 
             $table->date('tanggal_lahir');
