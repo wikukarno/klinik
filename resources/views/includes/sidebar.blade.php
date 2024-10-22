@@ -47,6 +47,16 @@
                 </a>
             </li>
 
+            <li class="menu-item {{ request()->is('petugas/pasien') ? 'open' : '' }}">
+                <a href="{{ route('pasien.index') }}"
+                    class="menu-link {{ request()->is('petugas/pasien') ? 'active' : '' }}">
+                    <span class="material-symbols-outlined menu-icon">
+                        group
+                    </span>
+                    <span class="title">Pasien</span>
+                </a>
+            </li>
+
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link" onclick="logout()">
                     <span class="material-symbols-outlined menu-icon">logout</span>

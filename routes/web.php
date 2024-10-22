@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Bidan\BidanDashboardController;
 use App\Http\Controllers\Petugas\LayananController;
+use App\Http\Controllers\Petugas\PasienController;
 use App\Http\Controllers\Petugas\PetugasDashboardController;
 use App\Http\Controllers\Petugas\RumahSakitController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,6 @@ Route::prefix('petugas')
 
         Route::resource('layanan', LayananController::class);
         Route::resource('rumah-sakit', RumahSakitController::class);
-
+        Route::resource('pasien', PasienController::class);
 
     });
