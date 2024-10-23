@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Bidan\BidanDashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Petugas\LayananController;
 use App\Http\Controllers\Petugas\PasienController;
 use App\Http\Controllers\Petugas\PetugasDashboardController;
@@ -19,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

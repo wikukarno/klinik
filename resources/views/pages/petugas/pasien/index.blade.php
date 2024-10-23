@@ -3,26 +3,23 @@
 @section('title', 'Pasien')
 
 @section('content')
-    {{-- Alert this page under contruction --}}
-    <div class="alert alert-warning" role="alert">
-        Halaman ini masih dalam tahap pengembangan. Terima kasih.
-    </div>
-    {{-- <div class="row row-sm">
+    <div class="row row-sm">
         <div class="col-12 col-lg-12">
             <div class="card bg-white border-0 rounded-3 mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-4">Data Layanan</h3>
-                        <a href="{{ route('layanan.create') }}" class="btn btn-lg btn-outline-primary mb-3">Tambah Data</a>
+                        <h3 class="card-title mb-4">Data Pasien</h3>
                     </div>
 
                     <div class="table-responsive">
-                        <table id="tb_layanan" class="table table-hover scroll-horizontal-vertical w-100">
+                        <table id="tb_pasien" class="table table-hover scroll-horizontal-vertical w-100">
                             <thead>
                                 <tr>
                                     <th class="text-start">No</th>
+                                    <th class="text-start">Nik</th>
                                     <th class="text-start">Nama</th>
-                                    <th class="text-start">Harga Layanan</th>
+                                    <th class="text-start">Keperluan/Layanan</th>
+                                    <th class="text-start">Tanggal Checkup</th>
                                     <th class="text-start">Aksi</th>
                                 </tr>
                             </thead>
@@ -33,19 +30,21 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 
 @push('after-script')
 <script>
-    $('#tb_layanan').dataTable({
+    $('#tb_pasien').dataTable({
         processing: true,
         serverSide: true,
         ajax: "{!! url()->current() !!}",
         columns: [
             { data: 'DT_RowIndex', name: 'id_layanan' },
-            { data: 'nama_layanan', name: 'nama_layanan' },
-            { data: 'harga_layanan', name: 'harga_layanan' },
+            { data: 'nama_pasien', name: 'nama_pasien' },
+            { data: 'nik_pasien', name: 'nik_pasien' },
+            { data: 'id_layanan', name: 'id_layanan' },
+            { data: 'tanggal_checkup', name: 'tanggal_checkup' },
             {
                 data: 'action',
                 searchable: false,
@@ -69,6 +68,14 @@
                 targets: 3,
                 className: 'text-start'
             },
+            {
+                targets: 4,
+                className: 'text-start'
+            },
+            {
+                targets: 5,
+                className: 'text-start'
+            }
         ]
     });
 
@@ -99,7 +106,7 @@
                             showConfirmButton: true
                         });
                         setTimeout(() => {
-                            $('#tb_layanan').DataTable().ajax.reload();
+                            $('#tb_pasien').DataTable().ajax.reload();
                         }, 1500);
                     }
                 });

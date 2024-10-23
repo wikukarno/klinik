@@ -25,4 +25,11 @@ class Pasien extends Model
         'tanggal_checkup',
         'alamat_pasien',
     ];
+
+    protected $with = ['layanan'];
+
+    public function layanan()
+    {
+        return $this->belongsTo(Layanan::class, 'id_layanan', 'id_layanan');
+    }
 }

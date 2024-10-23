@@ -186,7 +186,7 @@ http://www.tooplate.com/view/2098-health
   }
 
 
-  #about, #team, #news,
+  #about, #layanan, #rumahsakit, #news,
   #news-detail {
     position: relative;
     padding-top: 100px;
@@ -751,16 +751,16 @@ http://www.tooplate.com/view/2098-health
       APPOINTMENT             
   -----------------------------------------*/
 
-  #appointment {
+  #buatjanji {
     padding-top: 100px;
   }
 
-  #appointment label {
+  #buatjanji label {
     color: #393939;
     font-weight: 500;
   }
 
-  #appointment .form-control {
+  #buatjanji .form-control {
     background: #f9f9f9;
     border: none;
     border-radius: 3px;
@@ -771,19 +771,19 @@ http://www.tooplate.com/view/2098-health
     transition: all ease-in-out 0.4s;
   }
 
-  #appointment input,
-  #appointment select {
+  #buatjanji input,
+  #buatjanji select {
     height: 45px;
   }
 
-  #appointment button#cf-submit {
+  #buatjanji button#cf-submit {
     background: #a5c422;
     color: #ffffff;
     font-weight: 600;
     height: 55px;
   }
 
-  #appointment button#cf-submit:hover {
+  #buatjanji button#cf-submit:hover {
     background: #393939;
     color: #ffffff;
   }
@@ -1010,7 +1010,7 @@ http://www.tooplate.com/view/2098-health
       margin-top: 2em;
     }
 
-    #appointment-form {
+    #buatjanji-form {
       padding-top: 4em;
       padding-bottom: 4em;
     }
