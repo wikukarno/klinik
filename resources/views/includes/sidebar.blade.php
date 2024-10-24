@@ -27,6 +27,16 @@
                 <span class="menu-title-text">APPS</span>
             </li>
 
+            <li class="menu-item {{ request()->is('petugas/checkup') ? 'open' : '' }}">
+                <a href="{{ route('checkup.index') }}"
+                    class="menu-link {{ request()->is('petugas/checkup') ? 'active' : '' }}">
+                    <span class="material-symbols-outlined menu-icon">
+                        stethoscope
+                    </span>
+                    <span class="title">Check Up</span>
+                </a>
+            </li>
+
             <li class="menu-item {{ request()->is('petugas/rumah-sakit') ? 'open' : '' }}">
                 <a href="{{ route('rumah-sakit.index') }}"
                     class="menu-link {{ request()->is('petugas/rumah-sakit') ? 'active' : '' }}">

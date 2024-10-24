@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Bidan\BidanDashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Petugas\CheckUpController;
 use App\Http\Controllers\Petugas\LayananController;
 use App\Http\Controllers\Petugas\PasienController;
 use App\Http\Controllers\Petugas\PetugasDashboardController;
@@ -37,6 +38,7 @@ Route::prefix('petugas')
     ->group(function () {
         Route::get('/dashboard', [PetugasDashboardController::class, 'index'])->name('petugas.dashboard');
 
+        Route::resource('checkup', CheckUpController::class);
         Route::resource('layanan', LayananController::class);
         Route::resource('rumah-sakit', RumahSakitController::class);
         Route::resource('pasien', PasienController::class);
