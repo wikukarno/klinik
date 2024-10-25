@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Petugas;
 use App\Http\Controllers\Controller;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PasienController extends Controller
 {
@@ -14,11 +15,19 @@ class PasienController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Pasien::query();
+            $query = Pasien::where('status', 'selesai');
             return datatables()->of($query)
                 ->addIndexColumn()
                 ->editColumn('id_layanan', function ($item) {
                     return $item->layanan->nama_layanan;
+                })
+                ->editColumn('status', function ($item) {
+                    return match ($item->status) {
+                        'menunggu' => '<span class="badge bg-warning text-white">Menunggu</span>',
+                        'berlangsung' => '<span class="badge bg-primary text-white">Berlangsung</span>',
+                        'selesai' => '<span class="badge bg-success text-white">Selesai</span>',
+                        default => '<span class="badge bg-danger text-white">Error</span>',
+                    };
                 })
                 ->editColumn('action', function ($item) {
                     return '
@@ -32,7 +41,7 @@ class PasienController extends Controller
                         </div>
                     ';
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'status'])
                 ->make(true);
         }
         return view('pages.petugas.pasien.index');
@@ -83,6 +92,22 @@ class PasienController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            Pasien::findOrFail($id)->delete();
+
+            DB::commit();
+
+            toast('Data berhasil dihapus', 'success');
+
+            return to_route('pasien.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
+            toast('Data gagal dihapus', 'error');
+
+            return back();
+        }
     }
 }

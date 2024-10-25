@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Petugas;
 
-use App\Http\Controllers\Controller;
 use App\Models\Pasien;
+use App\Models\Layanan;
+use App\Models\RumahSakit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class CheckUpController extends Controller
 {
@@ -14,6 +17,37 @@ class CheckUpController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            $query = Pasien::whereIn('status', ['menunggu', 'berlangsung']);
+            return datatables()->of($query)
+                ->addIndexColumn()
+                ->editColumn('id_layanan', function ($item) {
+                    return $item->layanan->nama_layanan;
+                })
+                ->editColumn('status', function ($item) {
+                    return match ($item->status) {
+                        'menunggu' => '<span class="badge bg-warning text-white">Menunggu</span>',
+                        'berlangsung' => '<span class="badge bg-primary text-white">Berlangsung</span>',
+                        'selesai' => '<span class="badge bg-success text-white">Selesai</span>',
+                        default => '<span class="badge bg-danger text-white">Error</span>',
+                    };
+                })
+                ->editColumn('action', function ($item) {
+                    return '
+                        <div class="d-flex gap-2">
+                            <a href="' . route('checkup.edit', $item->id_pasien) . '" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit text-white"></i>
+                            </a>
+                            <button class="btn btn-danger btn-sm" onclick="deleteData(' . $item->id_pasien . ')">
+                                <i class="fas fa-trash text-white"></i>
+                            </button>
+                        </div>
+                    ';
+                })
+                ->rawColumns(['action', 'status'])
+                ->make(true);
+        }
+
         return view('pages.petugas.checkup.index');
     }
 
@@ -22,7 +56,9 @@ class CheckUpController extends Controller
      */
     public function create()
     {
-        return view('pages.petugas.checkup.create');
+        $layanan = Layanan::all();
+        $rumahSakit = RumahSakit::all();
+        return view('pages.petugas.checkup.create', compact('layanan', 'rumahSakit'));
     }
 
     /**
@@ -30,6 +66,17 @@ class CheckUpController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'id_layanan' => 'required|exists:layanan,id_layanan',
+            'nik_pasien' => 'required|unique:pasien,nik_pasien',
+            'no_bpjs' => 'nullable',
+            'nama_pasien' => 'required|string',
+            'no_hp_pasien' => 'required|numeric',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tanggal_lahir' => 'required|date',
+            'tanggal_checkup' => 'nullable|date',
+            'alamat_pasien' => 'required|string',
+        ]);
         try {
             DB::beginTransaction();
 
@@ -49,10 +96,10 @@ class CheckUpController extends Controller
 
             toast('Data berhasil disimpan', 'success');
 
-            return redirect()->route('petugas.checkup.index');
+            return redirect()->route('checkup.index');
         } catch (\Throwable $th) {
             DB::rollBack();
-
+            Log::error($th->getMessage());
             toast('Data gagal disimpan', 'error');
 
             return back();
@@ -75,8 +122,8 @@ class CheckUpController extends Controller
     public function edit(string $id)
     {
         $data = Pasien::findOrFail($id);
-
-        return view('pages.petugas.checkup.edit', compact('data'));
+        $layanan = Layanan::all();
+        return view('pages.petugas.checkup.edit', compact('data', 'layanan'));
     }
 
     /**
@@ -84,6 +131,18 @@ class CheckUpController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'id_layanan' => 'required|exists:layanan,id_layanan',
+            'nik_pasien' => 'required|unique:pasien,nik_pasien,' . $id . ',id_pasien',
+            'no_bpjs' => 'nullable',
+            'nama_pasien' => 'required|string',
+            'no_hp_pasien' => 'required|numeric',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tanggal_lahir' => 'required|date',
+            'tanggal_checkup' => 'nullable|date',
+            'alamat_pasien' => 'required|string',
+        ]);
+
         try {
             DB::beginTransaction();
 
@@ -103,7 +162,7 @@ class CheckUpController extends Controller
 
             toast('Data berhasil diubah', 'success');
 
-            return redirect()->route('petugas.checkup.index');
+            return redirect()->route('checkup.index');
         } catch (\Throwable $th) {
             DB::rollBack();
 
@@ -116,18 +175,18 @@ class CheckUpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy(string $id)
     {
         try {
             DB::beginTransaction();
 
-            Pasien::findOrFail($request->id)->delete();
+            Pasien::findOrFail($id)->delete();
 
             DB::commit();
 
             toast('Data berhasil dihapus', 'success');
 
-            return redirect()->route('petugas.checkup.index');
+            return redirect()->route('checkup.index');
         } catch (\Throwable $th) {
             DB::rollBack();
 

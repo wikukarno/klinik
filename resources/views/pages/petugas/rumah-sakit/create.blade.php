@@ -5,7 +5,6 @@
 @section('content')
     <div class="row row-sm">
         <div class="col-12 col-lg-12">
-            {{-- Error list --}}
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <div>
@@ -28,29 +27,34 @@
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Nama Rumah Sakit</label>
-                                    <input type="text" class="form-control h-55" name="nama_rumah_sakit" placeholder="Enter hospital name" required>
+                                    <label class="label text-secondary">
+                                        Nama Rumah Sakit <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control h-55" name="nama_rumah_sakit" placeholder="Masukan nama rumah sakit" required autofocus>
                                 </div>
                             </div>
                             
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Nomor HP Rumah Sakit</label>
-                                    <input type="number" min="1" class="form-control h-55" name="no_hp_rumah_sakit" placeholder="Enter phone number" required>
+                                    <label class="label text-secondary">
+                                        Nomor HP Rumah Sakit <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" min="1" class="form-control h-55" name="no_hp_rumah_sakit" placeholder="Masukan nomor hp rumah sakit" required>
                                 </div>
                             </div>
                             
                             <div class="col-lg-12 col-sm-12">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Alamat Rumah Sakit</label>
-                                    <input type="text" class="form-control h-55" name="alamat_rumah_sakit" placeholder="Enter hospital address"
-                                        required>
+                                    <label class="label text-secondary">
+                                        Alamat Rumah Sakit <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control h-55" name="alamat_rumah_sakit" placeholder="Masukan alamat rumah sakit" required></textarea>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap justify-content-end gap-3">
-                                    <a href="{{ route('rumah-sakit.index') }}" class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">Cancel</a>
+                                    <a href="{{ route('rumah-sakit.index') }}" class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">Batal</a>
                                     <button class="btn btn-primary py-2 px-4 fw-medium fs-16">
                                         Simpan
                                     </button>

@@ -5,7 +5,6 @@
 @section('content')
     <div class="row row-sm">
         <div class="col-12 col-lg-12">
-            {{-- Error list --}}
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <div>
@@ -29,23 +28,27 @@
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Nama Rumah Sakit</label>
-                                    <input type="text" value="{{ $data->nama_rumah_sakit }}" class="form-control h-55" name="nama_rumah_sakit" placeholder="Enter hospital name" required>
+                                    <label class="label text-secondary">
+                                        Nama Rumah Sakit <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" value="{{ $data->nama_rumah_sakit }}" class="form-control h-55" name="nama_rumah_sakit" placeholder="Masukan nama rumah sakit" required autofocus>
                                 </div>
                             </div>
                             
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Nomor HP Rumah Sakit</label>
-                                    <input type="number" value="{{ $data->no_hp_rumah_sakit }}" class="form-control h-55" name="no_hp_rumah_sakit" placeholder="Enter phone number" required>
+                                    <label class="label text-secondary">
+                                        Nomor HP Rumah Sakit <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" value="{{ $data->no_hp_rumah_sakit }}" class="form-control h-55" name="no_hp_rumah_sakit" placeholder="Masukan nomor hp rumah sakit" required>
                                 </div>
                             </div>
                             
                             <div class="col-lg-12 col-sm-12">
                                 <div class="form-group mb-4">
                                     <label class="label text-secondary">Alamat Rumah Sakit</label>
-                                    <input type="text" value="{{ $data->alamat_rumah_sakit }}" class="form-control h-55" name="alamat_rumah_sakit"
-                                        placeholder="Enter hospital address" required>
+                                    <textarea class="form-control h-55" name="alamat_rumah_sakit" placeholder="Masukan alamat rumah sakit"
+                                        required>{{ $data->alamat_rumah_sakit }}</textarea>
                                 </div>
                             </div>
 

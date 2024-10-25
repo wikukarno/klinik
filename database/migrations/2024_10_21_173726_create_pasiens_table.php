@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->date('tanggal_lahir');
             $table->date('tanggal_checkup')->nullable(); // jika pasien melahirkan
+            $table->enum('status', ['menunggu', 'berlangsung', 'selesai'])->default('menunggu');
             $table->text('alamat_pasien');
 
             $table->timestamps();

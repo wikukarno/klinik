@@ -142,16 +142,19 @@ class LayananController extends Controller
         try {
             DB::beginTransaction();
 
-            $data = Layanan::findOrFail($id);
-
-            $data->delete();
+            Layanan::findOrFail($id)->delete();
 
             DB::commit();
 
-            return response()->json($data, 200);
+            toast('Data berhasil dihapus', 'success');
+
+            return to_route('layanan.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => 'Failed to delete Data'], 500);
+
+            toast('Data gagal dihapus', 'error');
+
+            return back();
         }
     }
 }

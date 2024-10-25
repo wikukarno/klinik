@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Rumah sakit')
+@section('title', 'Check Up')
 
 @section('content')
     <div class="row row-sm">
@@ -8,18 +8,19 @@
             <div class="card bg-white border-0 rounded-3 mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-4">Data Rumah Sakit</h3>
-                        <a href="{{ route('rumah-sakit.create') }}" class="btn btn-lg btn-outline-primary mb-3">Tambah Data</a>
+                        <h3 class="card-title mb-4">Data Check Up</h3>
+                        <a href="{{ route('checkup.create') }}" class="btn btn-lg btn-outline-primary mb-3">Tambah Data</a>
                     </div>
 
                     <div class="table-responsive">
-                        <table id="tb_rumahsakit" class="table table-hover scroll-horizontal-vertical w-100">
+                        <table id="tb_checkup" class="table table-hover scroll-horizontal-vertical w-100">
                             <thead>
                                 <tr>
                                     <th class="text-start">No</th>
+                                    <th class="text-start">NIK</th>
                                     <th class="text-start">Nama</th>
-                                    <th class="text-start">No. Telepon</th>
-                                    <th class="text-start">Alamat</th>
+                                    <th class="text-start">Layanan</th>
+                                    <th class="text-start">Status</th>
                                     <th class="text-start">Aksi</th>
                                 </tr>
                             </thead>
@@ -35,15 +36,16 @@
 
 @push('after-script')
 <script>
-    $('#tb_rumahsakit').dataTable({
+    $('#tb_checkup').dataTable({
         processing: true,
         serverSide: true,
         ajax: "{!! url()->current() !!}",
         columns: [
-            { data: 'DT_RowIndex', name: 'id_rumah_sakit' },
-            { data: 'nama_rumah_sakit', name: 'nama_rumah_sakit' },
-            { data: 'no_hp_rumah_sakit', name: 'no_hp_rumah_sakit' },
-            { data: 'alamat_rumah_sakit', name: 'alamat_rumah_sakit' },
+            { data: 'DT_RowIndex', name: 'id_layanan' },
+            { data: 'nik_pasien', name: 'nik_pasien' },
+            { data: 'nama_pasien', name: 'nama_pasien' },
+            { data: 'id_layanan', name: 'id_layanan' },
+            { data: 'status', name: 'status' },
             {
                 data: 'action',
                 searchable: false,
@@ -70,6 +72,10 @@
             {
                 targets: 4,
                 className: 'text-start'
+            },
+            {
+                targets: 5,
+                className: 'text-start'
             }
         ]
     });
@@ -86,7 +92,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('petugas/rumah-sakit') }}/" + id,
+                    url: "{{ url('petugas/checkup') }}/" + id,
                     type: "POST",
                     data: {
                         _method: 'DELETE',
@@ -101,7 +107,7 @@
                             showConfirmButton: true
                         });
                         setTimeout(() => {
-                            $('#tb_rumahsakit').DataTable().ajax.reload();
+                            $('#tb_checkup').DataTable().ajax.reload();
                         }, 1500);
                     }
                 });

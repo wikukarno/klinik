@@ -5,7 +5,6 @@
 @section('content')
     <div class="row row-sm">
         <div class="col-12 col-lg-12">
-            {{-- Error list --}}
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <div>
@@ -29,30 +28,35 @@
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Nama Layanan</label>
-                                    <input type="text" value="{{ $data->nama_layanan }}" class="form-control h-55" name="nama_layanan" placeholder="Enter service name" required>
+                                    <label class="label text-secondary">
+                                        Nama Layanan <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" value="{{ $data->nama_layanan }}" class="form-control h-55" name="nama_layanan" placeholder="Masukan nama layanan" required>
                                 </div>
                             </div>
                             
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Harga Layanan</label>
-                                    <input type="number" id="harga_layanan" value="{{ $data->harga_layanan }}" step="0.01" class="form-control h-55" name="harga_layanan"
-                                        placeholder="Enter service price" required>
+                                    <label class="label text-secondary">
+                                        Harga Layanan <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" id="harga_layanan" value="Rp. {{ number_format($data->harga_layanan, 0, ',', '.') }}" class="form-control h-55" name="harga_layanan" placeholder="Masukan harga layanan" required>
                                 </div>
                             </div>
                             
                             <div class="col-lg-12 col-sm-12">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Deskripsi Layanan</label>
-                                    <textarea class="form-control h-55" name="deskripsi_layanan" placeholder="Enter service description"
+                                    <label class="label text-secondary">
+                                        Deskripsi Layanan <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control h-55" name="deskripsi_layanan" placeholder="Masukan deskripsi layanan"
                                         required>{{ $data->deskripsi_layanan }}</textarea>
                                 </div>
                             </div>
                             
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap justify-content-end gap-3">
-                                    <a href="{{ route('rumah-sakit.index') }}" class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">Batal</a>
+                                    <a href="{{ route('layanan.index') }}" class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">Batal</a>
                                     <button class="btn btn-primary py-2 px-4 fw-medium fs-16"> Simpan</button>
                                 </div>
                             </div>

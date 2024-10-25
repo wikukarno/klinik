@@ -5,7 +5,6 @@
 @section('content')
     <div class="row row-sm">
         <div class="col-12 col-lg-12">
-            {{-- Error list --}}
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <div>
@@ -28,23 +27,29 @@
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Nama Layanan</label>
-                                    <input type="text" class="form-control h-55" name="nama_layanan" placeholder="Enter service name" required autofocus>
+                                    <label class="label text-secondary">
+                                        Nama Layanan <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control h-55" name="nama_layanan" placeholder="Masukan nama layanan" required autofocus>
                                 </div>
                             </div>
                             
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Harga Layanan</label>
+                                    <label class="label text-secondary">
+                                        Harga Layanan <span class="text-danger">*</span>
+                                    </label>
                                     <input type="text" id="harga_layanan" class="form-control h-55" name="harga_layanan"
-                                        placeholder="Enter service price" required>
+                                        placeholder="Masukan harga layanan" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-sm-12">
                                 <div class="form-group mb-4">
-                                    <label class="label text-secondary">Deskripsi Layanan</label>
-                                    <textarea class="form-control h-55" name="deskripsi_layanan" placeholder="Enter service description"
+                                    <label class="label text-secondary">
+                                        Deskripsi Layanan <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control h-55" name="deskripsi_layanan" placeholder="Masukan deskripsi layanan"
                                         required></textarea>
                                 </div>
                             </div>

@@ -61,7 +61,9 @@
                                         </div>
                                         <div class="flex-grow-1 ms-2">
                                             <span>Pasien</span>
-                                            <h3 class="fs-20 mt-1 mb-0">65+</h3>
+                                            <h3 class="fs-20 mt-1 mb-0">
+                                                {{ $pasien }}
+                                            </h3>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between flex-wrap gap-2 align-items-center">
@@ -93,7 +95,13 @@
                                             </li>
                                             <li class="ms-m-15">
                                                 <a href="user-list.html"
-                                                    class="wh-34 lh-34 rounded-circle bg-primary d-block text-center text-decoration-none text-white fs-12 fw-medium border border-1 border-color-white">+55</a>
+                                                    class="wh-34 lh-34 rounded-circle bg-primary d-block text-center text-decoration-none text-white fs-12 fw-medium border border-1 border-color-white">
+                                                    @if ($pasien > 5)
+                                                        +{{ $pasien - 5 }}
+                                                        @else
+                                                        {{ $pasien }}
+                                                    @endif
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>

@@ -16,10 +16,10 @@
                             <thead>
                                 <tr>
                                     <th class="text-start">No</th>
-                                    <th class="text-start">Nik</th>
+                                    <th class="text-start">NIK</th>
                                     <th class="text-start">Nama</th>
-                                    <th class="text-start">Keperluan/Layanan</th>
-                                    <th class="text-start">Tanggal Checkup</th>
+                                    <th class="text-start">Layanan</th>
+                                    <th class="text-start">Status</th>
                                     <th class="text-start">Aksi</th>
                                 </tr>
                             </thead>
@@ -40,11 +40,11 @@
         serverSide: true,
         ajax: "{!! url()->current() !!}",
         columns: [
-            { data: 'DT_RowIndex', name: 'id_layanan' },
-            { data: 'nama_pasien', name: 'nama_pasien' },
+            { data: 'DT_RowIndex', name: 'id_pasien' },
             { data: 'nik_pasien', name: 'nik_pasien' },
+            { data: 'nama_pasien', name: 'nama_pasien' },
             { data: 'id_layanan', name: 'id_layanan' },
-            { data: 'tanggal_checkup', name: 'tanggal_checkup' },
+            { data: 'status', name: 'status' },
             {
                 data: 'action',
                 searchable: false,
@@ -91,7 +91,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('petugas/layanan') }}/" + id,
+                    url: "{{ url('petugas/pasien') }}/" + id,
                     type: "POST",
                     data: {
                         _method: 'DELETE',

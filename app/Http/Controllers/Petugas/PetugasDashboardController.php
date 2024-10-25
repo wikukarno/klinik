@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Petugas;
 
 use App\Http\Controllers\Controller;
 use App\Models\Layanan;
+use App\Models\Pasien;
 use App\Models\RumahSakit;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class PetugasDashboardController extends Controller
     {
         $rumah_sakit = RumahSakit::count();
         $layanan = Layanan::count();
-        return view('pages.petugas.dashboard', compact('rumah_sakit', 'layanan'));
+        $pasien = Pasien::where('status', 'selesai')->count();
+        return view('pages.petugas.dashboard', compact('rumah_sakit', 'layanan', 'pasien'));
     }
 }
