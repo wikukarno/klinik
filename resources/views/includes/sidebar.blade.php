@@ -16,56 +16,82 @@
             <li class="menu-title small text-uppercase">
                 <span class="menu-title-text">MAIN</span>
             </li>
-            <li class="menu-item {{ request()->is('petugas/dashboard') ? 'open' : '' }}">
-                <a href="{{ route('petugas.dashboard') }}" class="menu-link {{ request()->is('petugas/dashboard') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined menu-icon">dashboard</span>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
 
-            <li class="menu-title small text-uppercase">
-                <span class="menu-title-text">APPS</span>
-            </li>
 
-            <li class="menu-item {{ request()->is('petugas/checkup') ? 'open' : '' }}">
-                <a href="{{ route('checkup.index') }}"
-                    class="menu-link {{ request()->is('petugas/checkup') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined menu-icon">
-                        stethoscope
-                    </span>
-                    <span class="title">Check Up</span>
-                </a>
-            </li>
+            @if (Auth::user()->peran == 'bidan')
+                <li class="menu-item {{ request()->is('bidan/dashboard') ? 'open' : '' }}">
+                    <a href="{{ route('bidan.dashboard') }}"
+                        class="menu-link {{ request()->is('bidan/dashboard') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">dashboard</span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="menu-title small text-uppercase">
+                    <span class="menu-title-text">APPS</span>
+                </li>
+                
+                <li class="menu-item {{ request()->is('bidan/rekam-medis') ? 'open' : '' }}">
+                    <a href="{{ route('rekam-medis.index') }}" class="menu-link {{ request()->is('bidan/rekam-medis') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            stethoscope
+                        </span>
+                        <span class="title">Rekam Medis</span>
+                    </a>
+                </li>
+                
+            @endif
 
-            <li class="menu-item {{ request()->is('petugas/rumah-sakit') ? 'open' : '' }}">
-                <a href="{{ route('rumah-sakit.index') }}"
-                    class="menu-link {{ request()->is('petugas/rumah-sakit') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined menu-icon">
-                        local_hospital
-                    </span>
-                    <span class="title">Rumah Sakit</span>
-                </a>
-            </li>
-
-            <li class="menu-item {{ request()->is('petugas/layanan') ? 'open' : '' }}">
-                <a href="{{ route('layanan.index') }}"
-                    class="menu-link {{ request()->is('petugas/layanan') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined menu-icon">
-                        design_services
-                    </span>
-                    <span class="title">Layanan</span>
-                </a>
-            </li>
-
-            <li class="menu-item {{ request()->is('petugas/pasien') ? 'open' : '' }}">
-                <a href="{{ route('pasien.index') }}"
-                    class="menu-link {{ request()->is('petugas/pasien') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined menu-icon">
-                        group
-                    </span>
-                    <span class="title">Pasien</span>
-                </a>
-            </li>
+            @if (Auth::user()->peran == 'petugas')
+                <li class="menu-item {{ request()->is('petugas/dashboard') ? 'open' : '' }}">
+                    <a href="{{ route('petugas.dashboard') }}"
+                        class="menu-link {{ request()->is('petugas/dashboard') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">dashboard</span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="menu-title small text-uppercase">
+                    <span class="menu-title-text">APPS</span>
+                </li>
+                
+                <li class="menu-item {{ request()->is('petugas/checkup') ? 'open' : '' }}">
+                    <a href="{{ route('checkup.index') }}" class="menu-link {{ request()->is('petugas/checkup') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            stethoscope
+                        </span>
+                        <span class="title">Check Up</span>
+                    </a>
+                </li>
+                
+                <li class="menu-item {{ request()->is('petugas/rumah-sakit') ? 'open' : '' }}">
+                    <a href="{{ route('rumah-sakit.index') }}"
+                        class="menu-link {{ request()->is('petugas/rumah-sakit') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            local_hospital
+                        </span>
+                        <span class="title">Rumah Sakit</span>
+                    </a>
+                </li>
+                
+                <li class="menu-item {{ request()->is('petugas/layanan') ? 'open' : '' }}">
+                    <a href="{{ route('layanan.index') }}" class="menu-link {{ request()->is('petugas/layanan') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            design_services
+                        </span>
+                        <span class="title">Layanan</span>
+                    </a>
+                </li>
+                
+                <li class="menu-item {{ request()->is('petugas/pasien') ? 'open' : '' }}">
+                    <a href="{{ route('pasien.index') }}" class="menu-link {{ request()->is('petugas/pasien') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            group
+                        </span>
+                        <span class="title">Pasien</span>
+                    </a>
+                </li>
+            @endif
 
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link" onclick="logout()">
