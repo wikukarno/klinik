@@ -70,7 +70,7 @@
     <table>
         <tr>
             <td class="logo" rowspan="2" style="width: 20%; text-align: center;">
-                <img src="{{ $pic_kota }}" style="max-height: 95px" alt="">
+                <img src="{{ $pic_upt }}" style="max-height: 95px" alt="">
             </td>
             <td class="title" style="width: 100%; text-align: center;">
                 <h1><b>PEMERINTAHAN KABUPATEN KAMPAR</b></h1>
@@ -147,50 +147,63 @@
                         <tr>
                             <td style="width: 150px; vertical-align: top;">Nama</td>
                             <td style="width: 10px; vertical-align: top;">:</td>
-                            <td>sqoskqosq</td>
+                            <td>{{ $pasien->nama_pasien }}</td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Umur</td>
                             <td style="vertical-align: top;">:</td>
-                            <td>sqoskqosq</td>
+                            <td>
+                                {{ Carbon\Carbon::parse($pasien->tanggal_lahir)->age }} Tahun
+                            </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">NIK</td>
                             <td style="vertical-align: top;">:</td>
-                            <td>sqoskqosq</td>
+                            <td>
+                                {{ $pasien->nik_pasien }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top;">BPJS</td>
+                            <td style="vertical-align: top;">:</td>
+                            <td>
+                                {{ $pasien->no_bpjs ?? '-' }}
+                            </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Jenis Kelamin</td>
                             <td style="vertical-align: top;">:</td>
-                            <td>sqoskqosq</td>
+                            <td>
+                                {{ $pasien->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
+                            </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Alamat</td>
                             <td style="vertical-align: top;">:</td>
-                            <td>sqoskqosq</td>
+                            <td>
+                                {{ $pasien->alamat_pasien }}
+                            </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Anamnesa</td>
                             <td style="vertical-align: top;">:</td>
                             <td style="word-wrap: break-word;">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi omnis error
-                                blanditiis
-                                voluptatem rerum.
+                                {{ $rekam_medis->anamnesa }}
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Diagnosa</td>
                             <td style="vertical-align: top;">:</td>
                             <td style="word-wrap: break-word;">
-                                Accusamus asperiores fuga ducimus, consectetur voluptatibus corrupti quidem vero saepe
-                                maiores
-                                possimus! Repellendus recusandae adipisci aut.
+                                {{ $rekam_medis->diagnosa }}
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Therapy</td>
                             <td style="vertical-align: top;">:</td>
-                            <td>sqoskqosq</td>
+                            <td>
+                                {{ $rekam_medis->theraphy }}
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -213,7 +226,7 @@
                 <!-- Kolom Kanan untuk Tanda Tangan -->
                 <td style="width: 50%; text-align: start;">
                     <p>
-                        Pangkalan Baru, 12 Agustus 2020 <br>
+                        Pangkalan Baru, {{ Carbon\Carbon::now()->isoFormat('D MMMM Y') }} <br />
                         Dokter yang Memeriksa
                     </p>
                     <p style="margin-top: 70px;">

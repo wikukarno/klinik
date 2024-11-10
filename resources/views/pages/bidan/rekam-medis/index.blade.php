@@ -3,44 +3,59 @@
 @section('title', 'Rekam Medis')
 
 @section('content')
-    <div class="row row-sm">
-        <div class="col-12 col-lg-12">
-            <div class="card bg-white border-0 rounded-3 mb-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-4">Data Rekam Medis</h3>
-                    </div>
+<div class="row row-sm">
+    <div class="col-12 col-lg-12">
+        <div class="card bg-white border-0 rounded-3 mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-4">Data Rekam Medis</h3>
+                </div>
 
-                    <div class="table-responsive">
-                        <table id="tb_rekam_medis" class="table table-hover scroll-horizontal-vertical w-100">
-                            <thead>
-                                <tr>
-                                    <th class="text-start">No</th>
-                                    <th class="text-start">Nama</th>
-                                    <th class="text-start">Harga Layanan</th>
-                                    <th class="text-start">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="table-responsive">
+                    <table id="tb_rekam_medis" class="table table-hover scroll-horizontal-vertical w-100">
+                        <thead>
+                            <tr>
+                                <th class="text-start">No</th>
+                                <th class="text-start">Nomor Antrian</th>
+                                <th class="text-start">Nama Pasien</th>
+                                <th class="text-start">Status</th>
+                                <th class="text-start">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @push('after-script')
 <script>
+
+    window.addEventListener("pageshow", function(event) {
+        // Jika halaman di-cache dan user klik back, halaman akan di-refresh
+        if (event.persisted) {
+            location.reload();
+        }
+    });
+
+    function diagnosa(id){
+        window.location.href = "{{ route('bidan.proses.rekam.medis', '') }}/" + id;
+    }
+
+
     $('#tb_rekam_medis').dataTable({
         processing: true,
         serverSide: true,
         ajax: "{!! url()->current() !!}",
         columns: [
-            { data: 'DT_RowIndex', name: 'id_layanan' },
-            { data: 'nama_layanan', name: 'nama_layanan' },
-            { data: 'harga_layanan', name: 'harga_layanan' },
+            { data: 'DT_RowIndex', name: 'id_pasien' },
+            { data: 'no_antrian', name: 'no_antrian' },
+            { data: 'nama_pasien', name: 'nama_pasien' },
+            { data: 'status', name: 'status' },
             {
                 data: 'action',
                 searchable: false,

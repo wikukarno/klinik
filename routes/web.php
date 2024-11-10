@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Bidan\BidanDashboardController;
+use App\Http\Controllers\Bidan\RekamMedisController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Petugas\CheckUpController;
 use App\Http\Controllers\Petugas\LayananController;
@@ -30,6 +31,13 @@ Route::prefix('bidan')
     ->middleware(['auth', 'bidan'])
     ->group(function () {
         Route::get('/dashboard', [BidanDashboardController::class, 'index'])->name('bidan.dashboard');
+
+        Route::get('/rekam-medis', [RekamMedisController::class, 'index'])->name('rekam-medis.index');
+        Route::get('/rekam-medis/edit/{id_pasien}', [RekamMedisController::class, 'edit'])->name('rekam-medis.edit');
+        Route::get('/rekam-medis/diagnosa/{id_pasien}', [RekamMedisController::class, 'diagnosa'])->name('bidan.proses.rekam.medis');
+        Route::get('/rekam-medis/cetak/{id_pasien}', [RekamMedisController::class, 'downloadSuratRujukan'])->name('bidan.cetak.rekam.medis');
+        Route::post('/rekam-medis/diagnosa/store', [RekamMedisController::class, 'processRekamMedis'])->name('bidan.store.rekam.medis');
+        Route::put('/rekam-medis/diagnosa/{id_pasien}', [RekamMedisController::class, 'cancelProcessRekamMedis'])->name('bidan.cancel.rekam.medis');
 
     });
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('id_layanan', 12);
             $table->char('nik_pasien', 16)->unique();
             $table->char('no_bpjs', 13)->unique();
+            $table->string('no_antrian', 10)->unique();
 
             $table->string('nama_pasien', 50);
             $table->string('no_hp_pasien', 15)->unique();

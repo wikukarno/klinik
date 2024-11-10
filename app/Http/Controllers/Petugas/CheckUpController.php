@@ -70,6 +70,7 @@ class CheckUpController extends Controller
             'id_layanan' => 'required|exists:layanan,id_layanan',
             'nik_pasien' => 'required|unique:pasien,nik_pasien',
             'no_bpjs' => 'nullable',
+            'no_antrian' => 'required|unique:pasien,no_antrian',
             'nama_pasien' => 'required|string',
             'no_hp_pasien' => 'required|numeric',
             'jenis_kelamin' => 'required|in:L,P',
@@ -77,13 +78,24 @@ class CheckUpController extends Controller
             'tanggal_checkup' => 'nullable|date',
             'alamat_pasien' => 'required|string',
         ]);
+
         try {
             DB::beginTransaction();
+
+            // Mendapatkan nomor antrian terakhir dengan format "A" di depannya
+            $lastAntrian = Pasien::where('no_antrian', 'like', 'A%')->max('no_antrian');
+
+            // Mengambil angka dari nomor antrian terakhir, jika ada
+            $nextNumber = $lastAntrian ? (int) substr($lastAntrian, 1) + 1 : 1;
+
+            // Membuat nomor antrian dengan format "A" dan angka tiga digit
+            $no_antrian = 'A' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
             Pasien::create([
                 'id_layanan' => $request->id_layanan,
                 'nik_pasien' => $request->nik_pasien,
                 'no_bpjs' => $request->no_bpjs,
+                'no_antrian' => $no_antrian,
                 'nama_pasien' => $request->nama_pasien,
                 'no_hp_pasien' => $request->no_hp_pasien,
                 'jenis_kelamin' => $request->jenis_kelamin,

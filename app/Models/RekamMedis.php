@@ -16,10 +16,11 @@ class RekamMedis extends Model
 
     protected $fillable = [
         'id_pasien',
-        'anamnesa',
+        'id_bidan',
         'diagnosa',
-        'theraphy',
         'resep_obat',
+        'anamnesa',
+        'theraphy',
     ];
 
     public function pasien()

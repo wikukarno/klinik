@@ -19,6 +19,7 @@ class PasienSeeder extends Seeder
                 'id_layanan' => 1, // Pemeriksaan Umum
                 'nik_pasien' => '3201234567891234',
                 'no_bpjs' => '1234567890123',
+                'no_antrian' => 'A001',
                 'nama_pasien' => 'Ahmad Fauzi',
                 'no_hp_pasien' => '081234567890',
                 'jenis_kelamin' => 'L',
@@ -34,6 +35,7 @@ class PasienSeeder extends Seeder
                 'id_layanan' => 2, // Pemeriksaan Kehamilan
                 'nik_pasien' => '3209876543210987',
                 'no_bpjs' => '9876543210123',
+                'no_antrian' => 'A002',
                 'nama_pasien' => 'Siti Aminah',
                 'no_hp_pasien' => '081298765432',
                 'jenis_kelamin' => 'P',
@@ -49,12 +51,13 @@ class PasienSeeder extends Seeder
                 'id_layanan' => 3, // USG
                 'nik_pasien' => '3201122334455667',
                 'no_bpjs' => '1122334455667',
+                'no_antrian' => 'A003',
                 'nama_pasien' => 'Rina Handayani',
                 'no_hp_pasien' => '081345678901',
                 'jenis_kelamin' => 'P',
                 'tanggal_lahir' => '1995-03-10',
                 'tanggal_checkup' => '2024-10-20',
-                'status' => 'selesai',
+                'status' => 'menunggu',
                 'alamat_pasien' => 'Jl. Sudirman No.45, Pekanbaru',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -64,6 +67,7 @@ class PasienSeeder extends Seeder
                 'id_layanan' => 4, // Imunisasi
                 'nik_pasien' => '3209988776655443',
                 'no_bpjs' => '9988776655443',
+                'no_antrian' => 'A004',
                 'nama_pasien' => 'Bagus Saputra',
                 'no_hp_pasien' => '081367890123',
                 'jenis_kelamin' => 'L',
@@ -79,12 +83,13 @@ class PasienSeeder extends Seeder
                 'id_layanan' => 1, // Pemeriksaan Umum
                 'nik_pasien' => '3205566778899001',
                 'no_bpjs' => '5566778899001',
+                'no_antrian' => 'A005',
                 'nama_pasien' => 'Dewi Lestari',
                 'no_hp_pasien' => '081376549021',
                 'jenis_kelamin' => 'P',
                 'tanggal_lahir' => '1988-12-11',
                 'tanggal_checkup' => null,
-                'status' => 'berlangsung',
+                'status' => 'menunggu',
                 'alamat_pasien' => 'Jl. Pahlawan No.14, Pekanbaru',
                 'created_at' => now(),
                 'updated_at' => now(),

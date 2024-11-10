@@ -18,6 +18,7 @@ class Pasien extends Model
         'id_layanan',
         'nik_pasien',
         'no_bpjs',
+        'no_antrian',
         'nama_pasien',
         'no_hp_pasien',
         'jenis_kelamin',

@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rekam_medis', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_rekam_medis');
             $table->integer('id_pasien')->unsigned();
-            $table->text('anamnesa');
+            $table->integer('id_bidan')->unsigned();
+            $table->text('anamnesa')->nullable();
             $table->text('diagnosa');
-            $table->text('theraphy');
+            $table->text('theraphy')->nullable();
             $table->text('resep_obat');
             $table->timestamps();
             $table->softDeletes();
