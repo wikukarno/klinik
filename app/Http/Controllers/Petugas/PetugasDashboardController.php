@@ -14,7 +14,7 @@ class PetugasDashboardController extends Controller
     {
         $rumah_sakit = RumahSakit::count();
         $layanan = Layanan::count();
-        $pasien = Pasien::where('status', 'selesai')->count();
+        $pasien = Pasien::count();
         return view('pages.petugas.dashboard', compact('rumah_sakit', 'layanan', 'pasien'));
     }
 }
