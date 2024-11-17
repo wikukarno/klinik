@@ -22,15 +22,7 @@ class UserSeeder extends Seeder
                 'peran' => 'bidan',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'name' => 'Petugas',
-                'email' => 'petugas@gmail.com',
-                'password' => Hash::make('petugas'),
-                'peran' => 'petugas',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            ]
         ];
 
         User::insert($user);

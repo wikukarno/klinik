@@ -26,7 +26,7 @@
                         <h3 class="card-title mb-4">Tambah Data Check Up</h3>
                     </div>
 
-                    <form action="{{ route('checkup.store') }}" method="POST">
+                    <form action="{{ route('pasien.store') }}" method="POST">
                         @csrf
                         <div class="row">
 
@@ -123,7 +123,7 @@
 
                             <div class="col-lg-12">
                                 <div class="d-flex flex-wrap justify-content-end gap-3">
-                                    <a href="{{ route('checkup.index') }}" class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">Batal</a>
+                                    <a href="{{ route('pasien.index') }}" class="btn btn-danger py-2 px-4 fw-medium fs-16 text-white">Batal</a>
                                     <button class="btn btn-primary py-2 px-4 fw-medium fs-16">
                                         Simpan
                                     </button>

@@ -30,6 +30,15 @@
                 <li class="menu-title small text-uppercase">
                     <span class="menu-title-text">APPS</span>
                 </li>
+
+                <li class="menu-item {{ request()->is('bidan/pasien') ? 'open' : '' }}">
+                    <a href="{{ route('pasien.index') }}" class="menu-link {{ request()->is('bidan/pasien') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            group
+                        </span>
+                        <span class="title">Pasien</span>
+                    </a>
+                </li>
                 
                 <li class="menu-item {{ request()->is('bidan/rekam-medis') ? 'open' : '' }}">
                     <a href="{{ route('rekam-medis.index') }}" class="menu-link {{ request()->is('bidan/rekam-medis') ? 'active' : '' }}">
@@ -37,6 +46,25 @@
                             stethoscope
                         </span>
                         <span class="title">Rekam Medis</span>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ request()->is('bidan/rumah-sakit') ? 'open' : '' }}">
+                    <a href="{{ route('rumah-sakit.index') }}"
+                        class="menu-link {{ request()->is('bidan/rumah-sakit') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            local_hospital
+                        </span>
+                        <span class="title">Rumah Sakit</span>
+                    </a>
+                </li>
+                
+                <li class="menu-item {{ request()->is('bidan/layanan') ? 'open' : '' }}">
+                    <a href="{{ route('layanan.index') }}" class="menu-link {{ request()->is('bidan/layanan') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            design_services
+                        </span>
+                        <span class="title">Layanan</span>
                     </a>
                 </li>
                 

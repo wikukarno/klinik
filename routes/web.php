@@ -37,20 +37,7 @@ Route::prefix('bidan')
         Route::post('/rekam-medis/diagnosa/store', [RekamMedisController::class, 'processRekamMedis'])->name('bidan.store.rekam.medis');
         Route::put('/rekam-medis/diagnosa/{id_pasien}', [RekamMedisController::class, 'cancelProcessRekamMedis'])->name('bidan.cancel.rekam.medis');
 
-        Route::resource('checkup', CheckUpController::class);
+        Route::resource('pasien', CheckUpController::class);
         Route::resource('layanan', LayananController::class);
         Route::resource('rumah-sakit', RumahSakitController::class);
-        // Route::resource('pasien', PasienController::class);
     });
-
-// Route::prefix('petugas')
-//     ->middleware(['auth', 'petugas'])
-//     ->group(function () {
-//         Route::get('/dashboard', [PetugasDashboardController::class, 'index'])->name('petugas.dashboard');
-
-//         Route::resource('checkup', CheckUpController::class);
-//         Route::resource('layanan', LayananController::class);
-//         Route::resource('rumah-sakit', RumahSakitController::class);
-//         Route::resource('pasien', PasienController::class);
-
-//     });

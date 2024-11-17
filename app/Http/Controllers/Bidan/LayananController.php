@@ -37,7 +37,7 @@ class LayananController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('pages.petugas.layanan.index');
+        return view('pages.bidan.layanan.index');
     }
 
     /**
@@ -45,7 +45,7 @@ class LayananController extends Controller
      */
     public function create()
     {
-        return view('pages.petugas.layanan.create');
+        return view('pages.bidan.layanan.create');
     }
 
     /**
@@ -92,7 +92,7 @@ class LayananController extends Controller
     public function show(string $id)
     {
         $data = Layanan::findOrFail($id);
-        return view('pages.petugas.layanan.show', compact('data'));
+        return view('pages.bidan.layanan.show', compact('data'));
     }
 
     /**
@@ -101,7 +101,7 @@ class LayananController extends Controller
     public function edit(string $id)
     {
         $data = Layanan::findOrFail($id);
-        return view('pages.petugas.layanan.edit', compact('data'));
+        return view('pages.bidan.layanan.edit', compact('data'));
     }
 
     /**

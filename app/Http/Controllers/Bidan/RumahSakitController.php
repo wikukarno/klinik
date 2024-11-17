@@ -34,7 +34,7 @@ class RumahSakitController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('pages.petugas.rumah-sakit.index');
+        return view('pages.bidan.rumah-sakit.index');
     }
 
     /**
@@ -42,7 +42,7 @@ class RumahSakitController extends Controller
      */
     public function create()
     {
-        return view('pages.petugas.rumah-sakit.create');
+        return view('pages.bidan.rumah-sakit.create');
     }
 
     /**
@@ -85,7 +85,7 @@ class RumahSakitController extends Controller
     public function show(string $id)
     {
         $data = RumahSakit::findOrFail($id);
-        return view('pages.petugas.rumah-sakit.show', compact('data'));
+        return view('pages.bidan.rumah-sakit.show', compact('data'));
     }
 
     /**
@@ -94,7 +94,7 @@ class RumahSakitController extends Controller
     public function edit(string $id)
     {
         $data = RumahSakit::findOrFail($id);
-        return view('pages.petugas.rumah-sakit.edit', compact('data'));
+        return view('pages.bidan.rumah-sakit.edit', compact('data'));
     }
 
     /**

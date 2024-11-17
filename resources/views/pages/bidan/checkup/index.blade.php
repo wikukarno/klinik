@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Check Up')
+@section('title', 'Pasien')
 
 @section('content')
     <div class="row row-sm">
@@ -8,8 +8,8 @@
             <div class="card bg-white border-0 rounded-3 mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-4">Data Check Up</h3>
-                        <a href="{{ route('checkup.create') }}" class="btn btn-lg btn-outline-primary mb-3">Tambah Data</a>
+                        <h3 class="card-title mb-4">Data Pasien</h3>
+                        <a href="{{ route('pasien.create') }}" class="btn btn-lg btn-outline-primary mb-3">Tambah Data</a>
                     </div>
 
                     <div class="table-responsive">
@@ -18,6 +18,7 @@
                                 <tr>
                                     <th class="text-start">No</th>
                                     <th class="text-start">NIK</th>
+                                    <th class="text-start">Nomor Antrian</th>
                                     <th class="text-start">Nama</th>
                                     <th class="text-start">Layanan</th>
                                     <th class="text-start">Status</th>
@@ -43,6 +44,7 @@
         columns: [
             { data: 'DT_RowIndex', name: 'id_layanan' },
             { data: 'nik_pasien', name: 'nik_pasien' },
+            { data: 'no_antrian', name: 'no_antrian' },
             { data: 'nama_pasien', name: 'nama_pasien' },
             { data: 'id_layanan', name: 'id_layanan' },
             { data: 'status', name: 'status' },
@@ -92,7 +94,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('petugas/checkup') }}/" + id,
+                    url: "{{ url('bidan/pasien') }}/" + id,
                     type: "POST",
                     data: {
                         _method: 'DELETE',

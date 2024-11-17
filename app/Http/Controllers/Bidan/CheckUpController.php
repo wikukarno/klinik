@@ -18,11 +18,14 @@ class CheckUpController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Pasien::whereIn('status', ['menunggu', 'berlangsung']);
+            $query = Pasien::whereIn('status', ['menunggu', 'berlangsung'])->orderBy('no_antrian', 'asc');
             return datatables()->of($query)
                 ->addIndexColumn()
                 ->editColumn('id_layanan', function ($item) {
                     return $item->layanan->nama_layanan;
+                })
+                ->editColumn('no_antrian', function ($item) {
+                    return $item->no_antrian;
                 })
                 ->editColumn('status', function ($item) {
                     return match ($item->status) {
@@ -35,7 +38,7 @@ class CheckUpController extends Controller
                 ->editColumn('action', function ($item) {
                     return '
                         <div class="d-flex gap-2">
-                            <a href="' . route('checkup.edit', $item->id_pasien) . '" class="btn btn-warning btn-sm">
+                            <a href="' . route('pasien.edit', $item->id_pasien) . '" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit text-white"></i>
                             </a>
                             <button class="btn btn-danger btn-sm" onclick="deleteData(' . $item->id_pasien . ')">
@@ -48,7 +51,7 @@ class CheckUpController extends Controller
                 ->make(true);
         }
 
-        return view('pages.petugas.checkup.index');
+        return view('pages.bidan.checkup.index');
     }
 
     /**
@@ -58,7 +61,7 @@ class CheckUpController extends Controller
     {
         $layanan = Layanan::all();
         $rumahSakit = RumahSakit::all();
-        return view('pages.petugas.checkup.create', compact('layanan', 'rumahSakit'));
+        return view('pages.bidan.checkup.create', compact('layanan', 'rumahSakit'));
     }
 
     /**
@@ -70,7 +73,7 @@ class CheckUpController extends Controller
             'id_layanan' => 'required|exists:layanan,id_layanan',
             'nik_pasien' => 'required|unique:pasien,nik_pasien',
             'no_bpjs' => 'nullable',
-            'no_antrian' => 'required|unique:pasien,no_antrian',
+            'no_antrian' => 'unique:pasien,no_antrian',
             'nama_pasien' => 'required|string',
             'no_hp_pasien' => 'required|numeric',
             'jenis_kelamin' => 'required|in:L,P',
@@ -125,7 +128,7 @@ class CheckUpController extends Controller
     {
         $data = Pasien::with('layanan')->findOrFail($id);
 
-        return view('pages.petugas.checkup.show', compact('data'));
+        return view('pages.bidan.checkup.show', compact('data'));
     }
 
     /**
@@ -135,7 +138,7 @@ class CheckUpController extends Controller
     {
         $data = Pasien::findOrFail($id);
         $layanan = Layanan::all();
-        return view('pages.petugas.checkup.edit', compact('data', 'layanan'));
+        return view('pages.bidan.checkup.edit', compact('data', 'layanan'));
     }
 
     /**
