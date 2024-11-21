@@ -67,7 +67,7 @@
                 </button>
 
                 <!-- lOGO TEXT HERE -->
-                <a href="index.html" class="navbar-brand">Riska Klinik</a>
+                <a href="/" class="navbar-brand">Klinik Riska Yeni</a>
             </div>
 
             <!-- MENU LINKS -->
@@ -77,7 +77,17 @@
                     <li><a href="#tentang" class="smoothScroll">Tentang</a></li>
                     <li><a href="#layanan" class="smoothScroll">Layanan</a></li>
                     <li><a href="#rumahsakit" class="smoothScroll">Rumah Sakit</a></li>
-                    <li class="appointment-btn"><a href="https://api.whatsapp.com/send?phone=6282295024272 text=Halo%20Admin%20Riska%20Klinik%2C%20saya%20ingin%20membuat%20janji%20dengan%20dokter%20" target="_blank">Buat Janji</a></li>
+                    <li class="appointment-btn">
+                        <a href="#" target="_blank">Buat Janji</a>
+                    </li>
+                    
+                    @guest
+                        <li class="">
+                            <a href="{{ route('login') }}">
+                                Login
+                            </a>
+                        </li>
+                    @endguest
 
                     @auth
                         @if (Auth::user()->peran == 'bidan')

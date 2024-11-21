@@ -5,7 +5,17 @@
     <div class="row justify-content-center w-100">
         <div class="col-12 col-lg-6">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header text-center">
+                    <img src="{{ asset('logo.png') }}" class="mb-3" alt="Logo" width="100">
+                    <h1>
+                        Selamat Datang Di <br>
+                        <span style="color: #007bff">Aplikasi Klinik Riska Yeni</span>
+                    </h1>
+                    <p>
+                        Silahkan masuk ke sistem <br>
+                        menggunakan akun yang telah terdaftar.
+                    </p>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -66,7 +76,7 @@
                             </div>
                         </div>
 
-                        <div class="row text-center">
+                        {{-- <div class="row text-center">
                             <div class="col-12 col-lg-12">
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -74,7 +84,7 @@
                                 </a>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
