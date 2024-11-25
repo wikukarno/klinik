@@ -6,6 +6,7 @@ use App\Http\Controllers\Bidan\LayananController;
 use App\Http\Controllers\Bidan\RekamMedisController;
 use App\Http\Controllers\Bidan\RumahSakitController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Petugas\PetugasDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,17 @@ Route::prefix('bidan')
         Route::post('/rekam-medis/diagnosa/store', [RekamMedisController::class, 'processRekamMedis'])->name('bidan.store.rekam.medis');
         Route::put('/rekam-medis/diagnosa/{id_pasien}', [RekamMedisController::class, 'cancelProcessRekamMedis'])->name('bidan.cancel.rekam.medis');
 
+    });
+
+// Bidan
+Route::prefix('petugas')
+    ->middleware(['auth', 'petugas'])
+    ->group(function () {
+        Route::get('/dashboard', [PetugasDashboardController::class, 'index'])->name('petugas.dashboard');
+
         Route::resource('pasien', CheckUpController::class);
         Route::resource('layanan', LayananController::class);
         Route::resource('rumah-sakit', RumahSakitController::class);
     });
+
+
