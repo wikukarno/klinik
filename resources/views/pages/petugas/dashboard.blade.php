@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Bidan')
+@section('title', 'Dashboard Petugas')
 
 @section('content')
 <div class="row row-sm mg-b-20">

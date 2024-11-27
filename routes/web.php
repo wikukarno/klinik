@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\Bidan\BidanDashboardController;
-use App\Http\Controllers\Bidan\CheckUpController;
-use App\Http\Controllers\Bidan\LayananController;
 use App\Http\Controllers\Bidan\RekamMedisController;
-use App\Http\Controllers\Bidan\RumahSakitController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Petugas\AntrianController;
 use App\Http\Controllers\Petugas\PetugasDashboardController;
+use App\Http\Controllers\Petugas\AntrianController;
+use App\Http\Controllers\Petugas\LayananController;
+use App\Http\Controllers\Petugas\PasienController;
+use App\Http\Controllers\Petugas\RumahSakitController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +47,7 @@ Route::prefix('petugas')
     ->group(function () {
         Route::get('/dashboard', [PetugasDashboardController::class, 'index'])->name('petugas.dashboard');
 
-        Route::resource('pasien', CheckUpController::class);
+        Route::resource('pasien', PasienController::class);
         Route::resource('antrian', AntrianController::class);
         Route::resource('layanan', LayananController::class);
         Route::resource('rumah-sakit', RumahSakitController::class);

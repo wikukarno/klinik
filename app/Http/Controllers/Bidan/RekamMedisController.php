@@ -20,7 +20,7 @@ class RekamMedisController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Pasien::query()->orderBy('no_antrian');
+            $query = Pasien::where('status', 'berlangsung');
             return datatables()->of($query)
                 ->addIndexColumn()
                 ->editColumn('status', function ($item) {

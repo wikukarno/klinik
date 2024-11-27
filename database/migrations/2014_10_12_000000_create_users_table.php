@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('id', 12);
-            $table->enum('peran', ['bidan', 'petugas'])->default('petugas');
+            $table->enum('peran', ['bidan', 'petugas', 'user'])->default('user');
             $table->string('name', 50);
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->char('nik_pasien', 16)->unique();
+            $table->char('no_bpjs', 13)->unique();
+            $table->string('no_hp_pasien', 15)->unique();
+            $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->text('alamat_pasien')->nullable();
             $table->string('password', 255);
             $table->rememberToken();
             $table->timestamps();

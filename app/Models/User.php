@@ -21,6 +21,12 @@ class User extends Authenticatable
         'peran',
         'name',
         'email',
+        'nik_pasien',
+        'no_bpjs',
+        'no_hp_pasien',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'alamat_pasien',
         'password',
     ];
 
