@@ -18,7 +18,79 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="frontend/css/tooplate-style.css">
+    <style>
+        .team-thumb{
+            margin-bottom: 30px;
+        }
+        .news-thumb{
+            margin-bottom: 30px;
+        }
 
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .icon-rounded {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        
+        .team-thumb img {
+            border-radius: 10px;
+        }
+        
+        .team-info {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+        
+        .news-thumb img {
+        border-radius: 10px;
+        }
+        
+        .news-info {
+        margin-top: 10px;
+        text-align: center;
+        }
+        
+        .news-info h3 a {
+        text-decoration: none;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333;
+        }
+        
+        .news-info p {
+        font-size: 1rem;
+        color: #666;
+        }
+        
+        .news-thumb {
+        margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
@@ -78,7 +150,7 @@
                     <li><a href="#layanan" class="smoothScroll">Layanan</a></li>
                     <li><a href="#rumahsakit" class="smoothScroll">Rumah Sakit</a></li>
                     <li class="appointment-btn">
-                        <a href="#" target="_blank">Buat Janji</a>
+                        <a href="{{ route('register') }}">Daftar Antrian</a>
                     </li>
                     
                     @guest
@@ -154,77 +226,116 @@
         </div>
     </section>
 
-    <!-- LAYANAN -->
-    <section id="layanan" data-stellar-background-ratio="1">
+    <!-- ABOUT -->
+    <section id="about">
         <div class="container">
             <div class="row">
     
-                <div class="col-12 col-lg-12 text-center">
+                <div class="col-md-6 col-sm-6">
                     <div class="about-info">
-                        <h2 class="wow fadeInUp" data-wow-delay="0.1s">Layanan</h2>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.6s">Welcome to Your <i class="fa fa-h-square"></i>ealth
+                            Center</h2>
+                        <div class="wow fadeInUp" data-wow-delay="0.8s">
+                            <p>Aenean luctus lobortis tellus, vel ornare enim molestie condimentum. Curabitur lacinia nisi
+                                vitae velit volutpat venenatis.</p>
+                            <p>Sed a dignissim lacus. Quisque fermentum est non orci commodo, a luctus urna mattis. Ut
+                                placerat, diam a tempus vehicula.</p>
+                        </div>
+                        <figure class="profile wow fadeInUp" data-wow-delay="1s">
+                            <img src="{{ asset('frontend/images/author-image.jpg') }}" class="img-responsive" alt="">
+                            <figcaption>
+                                <h3>Dr. Riska Yeni</h3>
+                                <p>General Principal</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    
+    <!-- TEAM -->
+    <section id="team" data-stellar-background-ratio="1">
+        <div class="container">
+            <div class="row">
+    
+                <div class="col-md-6 col-sm-6">
+                    <div class="about-info">
+                        <h2 class="wow fadeInUp" data-wow-delay="0.1s">Our Service</h2>
                     </div>
                 </div>
     
                 <div class="clearfix"></div>
     
                 @forelse ($layanan as $item)
-                    <div class="col-md-4 col-sm-6">
-                        <div class="team-thumb wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="team-info text-center">
-                                <i class="fa fa-stethoscope fa-3x"></i>
-                                <h3>
-                                    {{ $item->nama_layanan }}
-                                </h3>
-                                <p>
-                                    {{ $item->deskripsi_layanan }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12 col-lg-12 text-center">
-                        <div class="alert alert-warning">
-                            Data layanan belum tersedia!.
-                        </div>
-                    </div>
-                @endforelse
-    
-            </div>
-        </div>
-    </section>
-
-    <!-- RUMAH SAKIT -->
-    <section id="rumahsakit" data-stellar-background-ratio="1">
-        <div class="container">
-            <div class="row">
-    
-                <div class="col-12 col-lg-12 text-center">
-                    <div class="about-info">
-                        <h2 class="wow fadeInUp" data-wow-delay="0.1s">Rumah Sakit</h2>
-                    </div>
-                </div>
-    
-                <div class="clearfix"></div>
-    
-                @forelse ($rumah_sakit as $item)
                 <div class="col-md-4 col-sm-6">
                     <div class="team-thumb wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="team-info text-center">
-                            <i class="fa fa-hospital-o fa-3x"></i>
+                        <div class="icon-container text-center mb-3">
+                            <div class="icon-rounded bg-primary text-white d-inline-flex align-items-center justify-content-center"
+                                style="width: 60px; height: 60px; border-radius: 50%;">
+                                <i class="fa fa-star fa-2x"></i>
+                            </div>
+                        </div>
+                        <img src="images/team-image1.jpg" class="img-responsive img-fluid rounded" alt="">
+                
+                        <div class="team-info text-center mt-3">
                             <h3>
-                                {{ $item->nama_rumah_sakit }}
+                                {{ $item->nama_layanan }}
                             </h3>
                             <p>
-                                {{ $item->no_hp_rumah_sakit }}
+                                {{ $item->deskripsi_layanan }}
                             </p>
                         </div>
                     </div>
                 </div>
                 @empty
-                <div class="col-12 col-lg-12 text-center">
+                <div class="text-center">
                     <div class="alert alert-warning">
-                        Data layanan belum tersedia!.
+                        Data layanan tidak ditemukan
                     </div>
+                </div>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" data-stellar-background-ratio="2.5">
+        <div class="container">
+            <div class="row">
+    
+                <div class="col-md-12 col-sm-12">
+                    <!-- SECTION TITLE -->
+                    <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
+                        <h2>Rumah Sakit</h2>
+                    </div>
+                </div>
+    
+                @forelse ($rumah_sakit as $item)
+                <div class="col-md-4 col-sm-6">
+                    <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="news-detail.html">
+                            <img src="images/news-image1.jpg" class="img-responsive img-fluid rounded mb-3" alt="">
+                        </a>
+                        <div class="news-info text-center">
+                            <div class="icon-container text-primary mb-2">
+                                <i class="fa fa-hospital-o fa-2x"></i>
+                            </div>
+                            <h3>
+                                <a href="news-detail.html" class="text-dark">
+                                    {{ $item->nama_rumah_sakit }}
+                                </a>
+                            </h3>
+                            <p class="text-muted">
+                                {{ $item->alamat_rumah_sakit }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="col-12 text-center">
+                    <p>Tidak ada data rumah sakit yang tersedia.</p>
                 </div>
                 @endforelse
     

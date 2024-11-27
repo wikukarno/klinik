@@ -8,6 +8,7 @@ use App\Http\Controllers\Petugas\AntrianController;
 use App\Http\Controllers\Petugas\LayananController;
 use App\Http\Controllers\Petugas\PasienController;
 use App\Http\Controllers\Petugas\RumahSakitController;
+use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,12 @@ Route::prefix('petugas')
         Route::resource('antrian', AntrianController::class);
         Route::resource('layanan', LayananController::class);
         Route::resource('rumah-sakit', RumahSakitController::class);
+    });
+
+Route::prefix('user')
+    ->middleware(['auth', 'user'])
+    ->group(function () {
+        Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     });
 
 

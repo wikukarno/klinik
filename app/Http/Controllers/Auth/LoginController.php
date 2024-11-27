@@ -33,7 +33,9 @@ class LoginController extends Controller
             return to_route('bidan.dashboard');
         } elseif (auth()->user()->peran == 'petugas') {
             return to_route('petugas.dashboard');
-        } else {
+        } elseif (auth()->user()->peran == 'user') {
+            return to_route('user.dashboard');
+        }else {
             return abort(403);
         }
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +29,20 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/';
+
+    public function authenticated()
+    {
+        if (auth()->user()->peran == 'bidan') {
+            return to_route('bidan.dashboard');
+        } elseif (auth()->user()->peran == 'petugas') {
+            return to_route('petugas.dashboard');
+        } elseif (auth()->user()->peran == 'user') {
+            return to_route('user.dashboard');
+        } else {
+            return abort(403);
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -50,8 +64,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'nik_pasien' => ['required', 'string', 'max:16', 'unique:users'],
+            'no_bpjs' => ['required', 'string', 'max:16', 'unique:users'],
+            'tanggal_lahir' => ['required', 'date'],
+            'alamat_pasien' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -63,10 +80,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        DB::beginTransaction();
+
+        try {
+            // Format tanggal lahir untuk password
+            $tanggalLahir = $data['tanggal_lahir']; // Contoh: 1985-03-10
+            $password = substr($tanggalLahir, 8, 2) . substr($tanggalLahir, 5, 2) . substr($tanggalLahir, 2, 2);
+            // Hasil password: 100385
+
+            // Buat user baru
+            User::create([
+                'name' => $data['name'],
+                'email' => $data['email'] ?? null,
+                'nik_pasien' => $data['nik_pasien'],
+                'no_bpjs' => $data['no_bpjs'],
+                'tanggal_lahir' => $data['tanggal_lahir'],
+                'alamat_pasien' => $data['alamat_pasien'],
+                'password' => Hash::make($password),
+            ]);
+
+            DB::commit();
+
+            toast('Pendaftaran berhasil', 'success');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            toast('Pendaftaran gagal', 'error');
+            throw $th;
+        }
     }
 }

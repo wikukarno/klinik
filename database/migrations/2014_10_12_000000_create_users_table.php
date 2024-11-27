@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->char('nik_pasien', 16)->unique();
             $table->char('no_bpjs', 13)->unique();
-            $table->string('no_hp_pasien', 15)->unique();
+            $table->string('no_hp_pasien', 15)->unique()->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat_pasien')->nullable();

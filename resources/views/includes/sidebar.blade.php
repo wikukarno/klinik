@@ -93,6 +93,20 @@
                 </li>
             @endif
 
+            @if (Auth::user()->peran == 'user')
+                <li class="menu-item {{ request()->is('user/dashboard') ? 'open' : '' }}">
+                    <a href="{{ route('user.dashboard') }}"
+                        class="menu-link {{ request()->is('user/dashboard') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">dashboard</span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="menu-title small text-uppercase">
+                    <span class="menu-title-text">APPS</span>
+                </li>
+            @endif
+
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link" onclick="logout()">
                     <span class="material-symbols-outlined menu-icon">logout</span>
