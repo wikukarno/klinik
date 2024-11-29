@@ -18,13 +18,6 @@ class Pasien extends Model
         'id_layanan',
         'nik_pasien',
         'no_bpjs',
-        'no_antrian',
-        'nama_pasien',
-        'no_hp_pasien',
-        'jenis_kelamin',
-        'tanggal_lahir',
-        'tanggal_checkup',
-        'alamat_pasien',
     ];
 
     protected $with = ['layanan'];
@@ -32,5 +25,15 @@ class Pasien extends Model
     public function layanan()
     {
         return $this->belongsTo(Layanan::class, 'id_layanan', 'id_layanan');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nik_pasien', 'nik_pasien');
+    }
+
+    public function antrian()
+    {
+        return $this->belongsTo(Antrian::class, 'pasien_id', 'id_pasien');
     }
 }

@@ -35,6 +35,32 @@
 
 @push('after-script')
 <script>
+
+    function btnTeruskan(id){
+        // console.log(id_antrian);
+        $.ajax({
+            url: "{{ url('petugas/antrian/teruskan') }}/" + id,
+            type: "POST",
+            data: {
+                _method: 'PUT',
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(res) {
+                console.log(res);
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: "Antrian berhasil diteruskan.",
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: true
+                });
+                setTimeout(() => {
+                    $('#tb_antrian').DataTable().ajax.reload();
+                }, 1500);
+            }
+        })
+    }
+
     $('#tb_antrian').dataTable({
         processing: true,
         serverSide: true,
@@ -71,39 +97,39 @@
         ]
     });
 
-    function deleteData(id){
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: "Data yang dihapus tidak dapat dikembalikan!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Hapus!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ url('petugas/antrian') }}/" + id,
-                    type: "POST",
-                    data: {
-                        _method: 'DELETE',
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: "Data berhasil dihapus.",
-                            icon: 'success',
-                            timer: 1500,
-                            showConfirmButton: true
-                        });
-                        setTimeout(() => {
-                            $('#tb_antrian').DataTable().ajax.reload();
-                        }, 1500);
-                    }
-                });
-            }
-        });
-    }
+    // function deleteData(id){
+    //     Swal.fire({
+    //         title: 'Apakah Anda yakin?',
+    //         text: "Data yang dihapus tidak dapat dikembalikan!",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonText: 'Ya, Hapus!'
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             $.ajax({
+    //                 url: "{{ url('petugas/antrian') }}/" + id,
+    //                 type: "POST",
+    //                 data: {
+    //                     _method: 'DELETE',
+    //                     _token: "{{ csrf_token() }}"
+    //                 },
+    //                 success: function(response) {
+    //                     Swal.fire({
+    //                         title: 'Berhasil!',
+    //                         text: "Data berhasil dihapus.",
+    //                         icon: 'success',
+    //                         timer: 1500,
+    //                         showConfirmButton: true
+    //                     });
+    //                     setTimeout(() => {
+    //                         $('#tb_antrian').DataTable().ajax.reload();
+    //                     }, 1500);
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
 </script>
 @endpush

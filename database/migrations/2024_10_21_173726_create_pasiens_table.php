@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id('id_pasien', 12);
             $table->string('nik_pasien', 16)->unique();
             $table->string('id_layanan', 12);
-            $table->string('nama_pasien', 50);
             $table->date('tanggal_checkup')->nullable(); // jika pasien melahirkan
-            $table->enum('status', ['menunggu', 'berlangsung', 'selesai'])->default('menunggu');
+            $table->enum('status', ['menunggu', 'berlangsung', 'selesai', 'dilewati', 'batal'])->default('menunggu');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -20,43 +20,35 @@
                                 </tr>
                                 <tr>
                                     <th>NIK Pasien</th>
-                                    <td>{{ $pasien->nik_pasien }}</td>
+                                    <td>{{ $pasien->user->nik_pasien }}</td>
                                 </tr>
                                 <tr>
                                     <th>Nomor BPJS</th>
-                                    <td>{{ $pasien->no_bpjs ?? '-' }}</td>
+                                    <td>{{ $pasien->user->no_bpjs ?? '-' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Nomor Antrian</th>
-                                    <td>{{ $pasien->no_antrian }}</td>
+                                    <td>{{ $antrian->no_antrian }}</td>
                                 </tr>
                                 <tr>
                                     <th>Nama Pasien</th>
-                                    <td>{{ $pasien->nama_pasien }}</td>
+                                    <td>{{ $pasien->user->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>No. HP Pasien</th>
-                                    <td>{{ $pasien->no_hp_pasien }}</td>
+                                    <td>{{ $pasien->user->no_hp_pasien }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jenis Kelamin</th>
-                                    <td>{{ $pasien->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                    <td>{{ $pasien->user->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Tanggal Lahir</th>
-                                    <td>{{ Carbon\Carbon::parse($pasien->tanggal_lahir)->isoFormat('D MMMM Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Tanggal Checkup</th>
-                                    <td>{{ Carbon\Carbon::parse($pasien->tanggal_checkup)->isoFormat('D MMMM Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td>{{ ucfirst($pasien->status) }}</td>
+                                    <td>{{ Carbon\Carbon::parse($pasien->user->tanggal_lahir)->isoFormat('D MMMM Y') }}</td>
                                 </tr>
                                 <tr>
                                     <th>Alamat Pasien</th>
-                                    <td>{{ $pasien->alamat_pasien }}</td>
+                                    <td>{{ $pasien->user->alamat_pasien }}</td>
                                 </tr>
                             </tbody>
                         </table>

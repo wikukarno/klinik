@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('no_antrian');
             $table->string('layanan_id', 11);
             $table->string('pasien_id', 11);
-            $table->enum('status', ['menunggu', 'berlangsung', 'selesai']);
+            $table->enum('status', ['menunggu', 'berlangsung', 'selesai', 'dilewati', 'batal'])->default('menunggu');
             $table->string('posisi')->default('petugas');
             $table->timestamps();
             $table->softDeletes();

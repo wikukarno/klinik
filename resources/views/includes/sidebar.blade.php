@@ -56,7 +56,7 @@
                 </li>
                 
                 <li class="menu-item {{ request()->is('petugas/antrian') ? 'open' : '' }}">
-                    <a href="{{ route('antrian.index') }}" class="menu-link {{ request()->is('petugas/antrian') ? 'active' : '' }}">
+                    <a href="{{ route('petugas.antrian.index') }}" class="menu-link {{ request()->is('petugas/antrian') ? 'active' : '' }}">
                         <span class="material-symbols-outlined menu-icon">
                             queue
                         </span>
@@ -84,7 +84,7 @@
                 </li>
                 
                 <li class="menu-item {{ request()->is('petugas/pasien') ? 'open' : '' }}">
-                    <a href="{{ route('pasien.index') }}" class="menu-link {{ request()->is('petugas/pasien') ? 'active' : '' }}">
+                    <a href="{{ route('petugas.pasien.index') }}" class="menu-link {{ request()->is('petugas/pasien') ? 'active' : '' }}">
                         <span class="material-symbols-outlined menu-icon">
                             group
                         </span>
@@ -104,6 +104,24 @@
                 
                 <li class="menu-title small text-uppercase">
                     <span class="menu-title-text">APPS</span>
+                </li>
+
+                <li class="menu-item {{ request()->is('user/layanan') ? 'open' : '' }}">
+                    <a href="{{ route('user.layanan.index') }}" class="menu-link {{ request()->is('user/layanan') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            design_services
+                        </span>
+                        <span class="title">Layanan</span>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ request()->is('user/akun') ? 'open' : '' }}">
+                    <a href="{{ route('user.akun.index') }}" class="menu-link {{ request()->is('user/akun') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            account_circle
+                        </span>
+                        <span class="title">Akun</span>
+                    </a>
                 </li>
             @endif
 

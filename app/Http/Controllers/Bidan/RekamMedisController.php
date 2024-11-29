@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bidan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Antrian;
 use App\Models\Pasien;
 use App\Models\RekamMedis;
 use Carbon\Carbon;
@@ -23,6 +24,9 @@ class RekamMedisController extends Controller
             $query = Pasien::where('status', 'berlangsung');
             return datatables()->of($query)
                 ->addIndexColumn()
+                ->editColumn('nama_pasien', function ($item) {
+                    return $item->user->name;
+                })
                 ->editColumn('status', function ($item) {
                     return $item->status == 'menunggu' ? '<span class="badge bg-warning text-white">Menunggu</span>' : ($item->status == 'berlangsung' ? '<span class="badge bg-primary">Berlangsung</span>' : '<span class="badge bg-success">Selesai</span>');
                 })
@@ -71,7 +75,6 @@ class RekamMedisController extends Controller
                             </div>
                         ';
                     }
-
                 })
                 ->rawColumns(['action', 'status'])
                 ->make(true);
@@ -81,14 +84,9 @@ class RekamMedisController extends Controller
 
     public function diagnosa(string $id)
     {
-        $pasien = Pasien::find($id);
-        if($pasien->status == 'menunggu'){
-            $pasien->status = 'berlangsung';
-            $pasien->save();
-
-            return view('pages.bidan.rekam-medis.diagnosa', compact('pasien'));
-        }
-        return view('pages.bidan.rekam-medis.diagnosa', compact('pasien'));
+        $pasien = Pasien::with('user')->find($id);
+        $antrian = Antrian::where('pasien_id', $id)->first();
+        return view('pages.bidan.rekam-medis.diagnosa', compact('pasien', 'antrian'));
     }
 
     public function cancelProcessRekamMedis(Request $request)

@@ -9,6 +9,7 @@ use App\Http\Controllers\Petugas\LayananController;
 use App\Http\Controllers\Petugas\PasienController;
 use App\Http\Controllers\Petugas\RumahSakitController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\UserLayananController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,8 +49,17 @@ Route::prefix('petugas')
     ->group(function () {
         Route::get('/dashboard', [PetugasDashboardController::class, 'index'])->name('petugas.dashboard');
 
-        Route::resource('pasien', PasienController::class);
-        Route::resource('antrian', AntrianController::class);
+        // Custome route antrian
+        Route::get('/antrian', [AntrianController::class, 'index'])->name('petugas.antrian.index');
+        Route::put('/antrian/teruskan/{id}', [AntrianController::class, 'teruskan'])->name('petugas.antrian.teruskan');
+        Route::get('/antrian/lewati', [AntrianController::class, 'lewati'])->name('petugas.antrian.lewati');
+        // Custome route antrian
+
+        // Custom route pasien
+        Route::get('/pasien', [PasienController::class, 'index'])->name('petugas.pasien.index');
+
+
+        // Route::resource('pasien', PasienController::class);
         Route::resource('layanan', LayananController::class);
         Route::resource('rumah-sakit', RumahSakitController::class);
     });
@@ -58,6 +68,13 @@ Route::prefix('user')
     ->middleware(['auth', 'user'])
     ->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+        
+        Route::get('/layanan', [UserLayananController::class, 'index'])->name('user.layanan.index');
+        Route::post('/layanan/daftar', [UserLayananController::class, 'store'])->name('user.layanan.store');
+        
+        Route::get('/akun', [UserDashboardController::class, 'akun'])->name('user.akun.index');
+        Route::get('/akun/edit', [UserDashboardController::class, 'edit'])->name('user.akun.edit');
+        Route::put('/akun/update/{id}', [UserDashboardController::class, 'update'])->name('user.akun.update');
     });
 
 

@@ -20,16 +20,16 @@
                     <li class="header-right-item">
                         <div class="dropdown admin-profile">
                             <div class="d-xxl-flex align-items-center bg-transparent border-0 text-start p-0 cursor">
-                                <div class="flex-shrink-0">
+                                {{-- <div class="flex-shrink-0">
                                     <img class="rounded-circle wh-40 administrator"
                                         src="{{ asset('assets/images/administrator.jpg') }}" alt="admin">
-                                </div>
+                                </div> --}}
                                 <div class="flex-grow-1 ms-2">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="d-none d-xxl-block">
                                             <div class="d-flex align-content-center">
                                                 <h3>
-                                                    {{ Auth::user()->name }}
+                                                    Hi, {{ Auth::user()->name }}
                                                 </h3>
                                             </div>
                                         </div>

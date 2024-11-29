@@ -73,6 +73,13 @@
                                 {{ __('Login') }}
                             </button>
                         </div>
+
+                        <div class="text-center mt-3">
+                            Belum punya akun?
+                            <a href="{{ route('register') }}">
+                                {{ __('Daftar sekarang') }}
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>

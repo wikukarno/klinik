@@ -16,11 +16,10 @@
                             <thead>
                                 <tr>
                                     <th class="text-start">No</th>
-                                    <th class="text-start">Nomor Antrian</th>
                                     <th class="text-start">Layanan</th>
                                     <th class="text-start">Nama</th>
                                     <th class="text-start">Status</th>
-                                    <th class="text-start">Aksi</th>
+                                    {{-- <th class="text-start">Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,15 +40,14 @@
         ajax: "{!! url()->current() !!}",
         columns: [
             { data: 'DT_RowIndex', name: 'id_pasien' },
-            { data: 'no_antrian', name: 'no_antrian' },
-            { data: 'layanan_id', name: 'layanan_id' },
+            { data: 'id_layanan', name: 'id_layanan' },
             { data: 'nama_pasien', name: 'nama_pasien' },
-            { data: 'status', name: 'status' },
-            {
-                data: 'action',
-                searchable: false,
-                sortable: false
-            }
+            { data: 'status', name: 'status' }
+            // {
+            //     data: 'action',
+            //     searchable: false,
+            //     sortable: false
+            // }
         ],
         columnDefs: [
             {
@@ -63,11 +61,7 @@
             {
                 targets: 2,
                 className: 'text-start'
-            },
-            {
-                targets: 3,
-                className: 'text-start'
-            },
+            }
         ]
     });
 

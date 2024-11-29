@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Petugas;
 use App\Http\Controllers\Controller;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PasienController extends Controller
 {
@@ -15,9 +17,12 @@ class PasienController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Pasien::where('status', 'selesai');
+            $query = Pasien::with('layanan');
             return datatables()->of($query)
                 ->addIndexColumn()
+                ->editColumn('nama_pasien', function ($item) {
+                    return $item->user->name;
+                })
                 ->editColumn('id_layanan', function ($item) {
                     return $item->layanan->nama_layanan;
                 })
@@ -29,18 +34,18 @@ class PasienController extends Controller
                         default => '<span class="badge bg-danger text-white">Error</span>',
                     };
                 })
-                ->editColumn('action', function ($item) {
-                    return '
-                        <div class="d-flex gap-2">
-                            <a href="' . route('layanan.edit', $item->id_layanan) . '" class="btn btn-warning btn-sm">
-                                <i class="fas fa-edit text-white"></i>
-                            </a>
-                            <button class="btn btn-danger btn-sm" onclick="deleteData(' . $item->id_layanan . ')">
-                                <i class="fas fa-trash text-white"></i>
-                            </button>
-                        </div>
-                    ';
-                })
+                // ->editColumn('action', function ($item) {
+                //     return '
+                //         <div class="d-flex gap-2">
+                //             <a href="' . route('layanan.edit', $item->id_layanan) . '" class="btn btn-warning btn-sm">
+                //                 <i class="fas fa-edit text-white"></i>
+                //             </a>
+                //             <button class="btn btn-danger btn-sm" onclick="deleteData(' . $item->id_layanan . ')">
+                //                 <i class="fas fa-trash text-white"></i>
+                //             </button>
+                //         </div>
+                //     ';
+                // })
                 ->rawColumns(['action', 'status'])
                 ->make(true);
         }

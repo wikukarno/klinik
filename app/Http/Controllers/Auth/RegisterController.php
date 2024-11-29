@@ -29,20 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/';
-
-    public function authenticated()
-    {
-        if (auth()->user()->peran == 'bidan') {
-            return to_route('bidan.dashboard');
-        } elseif (auth()->user()->peran == 'petugas') {
-            return to_route('petugas.dashboard');
-        } elseif (auth()->user()->peran == 'user') {
-            return to_route('user.dashboard');
-        } else {
-            return abort(403);
-        }
-    }
+    protected $redirectTo = '/user/dashboard';
 
     /**
      * Create a new controller instance.
@@ -89,7 +76,7 @@ class RegisterController extends Controller
             // Hasil password: 100385
 
             // Buat user baru
-            User::create([
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'] ?? null,
                 'nik_pasien' => $data['nik_pasien'],
@@ -102,6 +89,7 @@ class RegisterController extends Controller
             DB::commit();
 
             toast('Pendaftaran berhasil', 'success');
+            return $user;
         } catch (\Throwable $th) {
             DB::rollBack();
             toast('Pendaftaran gagal', 'error');

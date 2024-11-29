@@ -12,7 +12,10 @@ class Antrian extends Model
 
     protected $table = 'antrian';
 
+    protected $primaryKey = 'id_antrian';
+
     protected $fillable = [
+        'id_antrian',
         'no_antrian',
         'layanan_id',
         'pasien_id',
@@ -23,5 +26,10 @@ class Antrian extends Model
     public function layanan()
     {
         return $this->belongsTo(Layanan::class, 'layanan_id');
+    }
+
+    public function pasien()
+    {
+        return $this->belongsTo(Pasien::class, 'pasien_id');
     }
 }
