@@ -40,6 +40,15 @@
                     </a>
                 </li>
 
+                <li class="menu-item {{ request()->is('bidan/pasien') ? 'open' : '' }}">
+                    <a href="{{ route('bidan.pasien.index') }}" class="menu-link {{ request()->is('bidan/pasien') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            group
+                        </span>
+                        <span class="title">Pasien</span>
+                    </a>
+                </li>
+
             @endif
 
             @if (Auth::user()->peran == 'petugas')
@@ -112,6 +121,16 @@
                             design_services
                         </span>
                         <span class="title">Layanan</span>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ request()->is('user/rekam-medis') ? 'open' : '' }}">
+                    <a href="{{ route('user.rekam.medis.index') }}"
+                        class="menu-link {{ request()->is('user/rekam-medis') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">
+                            stethoscope
+                        </span>
+                        <span class="title">Rekam Medis</span>
                     </a>
                 </li>
 

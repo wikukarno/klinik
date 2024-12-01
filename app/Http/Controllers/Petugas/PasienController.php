@@ -26,6 +26,9 @@ class PasienController extends Controller
                 ->editColumn('id_layanan', function ($item) {
                     return $item->layanan->nama_layanan;
                 })
+                ->editColumn('harga_layanan', function ($item) {
+                    return 'Rp ' . number_format($item->layanan->harga_layanan, 0, ',', '.');
+                })
                 ->editColumn('status', function ($item) {
                     return match ($item->status) {
                         'menunggu' => '<span class="badge bg-warning text-white">Menunggu</span>',

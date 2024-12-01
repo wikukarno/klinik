@@ -20,7 +20,7 @@
                                     <th class="text-start">Harga Layanan</th>
                                     <th class="text-start">Nama</th>
                                     <th class="text-start">Status</th>
-                                    {{-- <th class="text-start">Aksi</th> --}}
+                                    <th class="text-start">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,11 +45,11 @@
             { data: 'harga_layanan', name: 'harga_layanan' },
             { data: 'nama_pasien', name: 'nama_pasien' },
             { data: 'status', name: 'status' },
-            // {
-            //     data: 'action',
-            //     searchable: false,
-            //     sortable: false
-            // }
+            {
+                data: 'action',
+                searchable: false,
+                sortable: false
+            }
         ],
         columnDefs: [
             {
@@ -63,43 +63,12 @@
             {
                 targets: 2,
                 className: 'text-start'
+            },
+            {
+                targets: 3,
+                className: 'text-start'
             }
         ]
     });
-
-    function deleteData(id){
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: "Data yang dihapus tidak dapat dikembalikan!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Hapus!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ url('petugas/antrian') }}/" + id,
-                    type: "POST",
-                    data: {
-                        _method: 'DELETE',
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: "Data berhasil dihapus.",
-                            icon: 'success',
-                            timer: 1500,
-                            showConfirmButton: true
-                        });
-                        setTimeout(() => {
-                            $('#tb_pasien').DataTable().ajax.reload();
-                        }, 1500);
-                    }
-                });
-            }
-        });
-    }
 </script>
 @endpush

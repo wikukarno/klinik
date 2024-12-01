@@ -147,41 +147,41 @@
                         <tr>
                             <td style="width: 150px; vertical-align: top;">Nama</td>
                             <td style="width: 10px; vertical-align: top;">:</td>
-                            <td>{{ $pasien->nama_pasien }}</td>
+                            <td>{{ $pasien->user->name }}</td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Umur</td>
                             <td style="vertical-align: top;">:</td>
                             <td>
-                                {{ Carbon\Carbon::parse($pasien->tanggal_lahir)->age }} Tahun
+                                {{ Carbon\Carbon::parse($pasien->user->tanggal_lahir)->age }} Tahun
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">NIK</td>
                             <td style="vertical-align: top;">:</td>
                             <td>
-                                {{ $pasien->nik_pasien }}
+                                {{ $pasien->user->nik_pasien }}
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">BPJS</td>
                             <td style="vertical-align: top;">:</td>
                             <td>
-                                {{ $pasien->no_bpjs ?? '-' }}
+                                {{ $pasien->user->no_bpjs ?? '-' }}
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Jenis Kelamin</td>
                             <td style="vertical-align: top;">:</td>
                             <td>
-                                {{ $pasien->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
+                                {{ $pasien->user->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">Alamat</td>
                             <td style="vertical-align: top;">:</td>
                             <td>
-                                {{ $pasien->alamat_pasien }}
+                                {{ $pasien->user->alamat_pasien }}
                             </td>
                         </tr>
                         <tr>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Bidan\BidanDashboardController;
+use App\Http\Controllers\Bidan\BidanPasienController;
 use App\Http\Controllers\Bidan\RekamMedisController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Petugas\PetugasDashboardController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Petugas\PasienController;
 use App\Http\Controllers\Petugas\RumahSakitController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserLayananController;
+use App\Http\Controllers\User\UserRekamMedisController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,7 @@ Route::prefix('bidan')
         Route::post('/rekam-medis/diagnosa/store', [RekamMedisController::class, 'processRekamMedis'])->name('bidan.store.rekam.medis');
         Route::put('/rekam-medis/diagnosa/{id_pasien}', [RekamMedisController::class, 'cancelProcessRekamMedis'])->name('bidan.cancel.rekam.medis');
 
+        Route::get('/pasien', [BidanPasienController::class, 'index'])->name('bidan.pasien.index');
     });
 
 // Bidan
@@ -71,6 +74,9 @@ Route::prefix('user')
         
         Route::get('/layanan', [UserLayananController::class, 'index'])->name('user.layanan.index');
         Route::post('/layanan/daftar', [UserLayananController::class, 'store'])->name('user.layanan.store');
+
+        Route::get('/rekam-medis', [UserRekamMedisController::class, 'index'])->name('user.rekam.medis.index');
+        Route::get('/rekam-medis/cetak/{id_pasien}', [UserRekamMedisController::class, 'downloadSuratRujukan'])->name('user.cetak.rekam.medis');
         
         Route::get('/akun', [UserDashboardController::class, 'akun'])->name('user.akun.index');
         Route::get('/akun/edit', [UserDashboardController::class, 'edit'])->name('user.akun.edit');

@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Antrian;
 use App\Models\Pasien;
 use App\Models\RekamMedis;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use PDF;
 
 class RekamMedisController extends Controller
 {
@@ -135,6 +135,10 @@ class RekamMedisController extends Controller
             $pasien->status = 'selesai';
             $pasien->save();
 
+            $antrian = Antrian::where('pasien_id', $request->id_pasien)->first();
+            $antrian->status = 'selesai';
+            $antrian->save();
+
             DB::commit();
             
             toast('Data berhasil disimpan!', 'success');
@@ -162,7 +166,7 @@ class RekamMedisController extends Controller
         $pasien = Pasien::find($id);
         $rekam_medis = RekamMedis::where('id_pasien', $id)->first();
 
-        $pdf  = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.cetak.surat-rujukan', [
+        $pdf  = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.cetak.surat-rujukan', [
             'pic_upt' => $pic_upt,
             'pic_kesehatan' => $pic_kesehatan,
             'pasien' => $pasien,
