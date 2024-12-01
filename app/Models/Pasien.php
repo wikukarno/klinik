@@ -32,8 +32,9 @@ class Pasien extends Model
         return $this->belongsTo(User::class, 'nik_pasien', 'nik_pasien');
     }
 
+    // Relasi ke antrean (hasOne karena satu pasien hanya memiliki satu antrean)
     public function antrian()
     {
-        return $this->belongsTo(Antrian::class, 'pasien_id', 'id_pasien');
+        return $this->hasOne(Antrian::class, 'pasien_id', 'id_pasien');
     }
 }

@@ -37,7 +37,6 @@
 <script>
 
     function btnTeruskan(id){
-        // console.log(id_antrian);
         $.ajax({
             url: "{{ url('petugas/antrian/teruskan') }}/" + id,
             type: "POST",
@@ -47,9 +46,44 @@
             },
             success: function(res) {
                 console.log(res);
+                if(res.status == false){
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: res.message,
+                        icon: 'error',
+                        timer: 1500,
+                        showConfirmButton: true
+                    });
+                }else{
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: "Antrian berhasil diteruskan.",
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: true
+                    });
+                    setTimeout(() => {
+                        $('#tb_antrian').DataTable().ajax.reload();
+                    }, 1500);
+                }
+                
+            }
+        })
+    }
+
+    function btnLewati(id){
+        $.ajax({
+            url: "{{ url('petugas/antrian/lewati') }}/" + id,
+            type: "POST",
+            data: {
+                _method: 'PUT',
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(res) {
+                console.log(res);
                 Swal.fire({
                     title: 'Berhasil!',
-                    text: "Antrian berhasil diteruskan.",
+                    text: "Antrian berhasil dilewati.",
                     icon: 'success',
                     timer: 1500,
                     showConfirmButton: true
@@ -131,5 +165,40 @@
     //         }
     //     });
     // }
+</script>
+
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script>
+    const socket = io("http://localhost:6001");
+    
+        // Pastikan koneksi ke server Socket.IO berhasil
+        socket.on("connect", () => {
+            console.log("Connected to Socket.IO server:", socket.id);
+        });
+    
+        // Mendengarkan event 'refresh:antrian' dari server Socket.IO
+        socket.on("refresh:antrian", (data) => {
+    
+            // Cari elemen hero dengan ID 'antrianDipanggilHero'
+            const antrianDipanggilHero = document.getElementById("tb_antrian");
+    
+
+            if (antrianDipanggilHero) {
+                // Update datatable ketika ada event 'refresh:antrian'
+                $('#tb_antrian').DataTable().ajax.reload();
+            } else {
+                console.warn("Elemen dengan ID 'antrianDipanggilHero' tidak ditemukan di DOM.");
+            }
+        });
+    
+        // Tangani koneksi error
+        socket.on("connect_error", (error) => {
+            console.error("Socket.IO Connection Error:", error);
+        });
+    
+        // Tangani disconnect
+        socket.on("disconnect", () => {
+            console.warn("Disconnected from Socket.IO server");
+        });
 </script>
 @endpush

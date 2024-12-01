@@ -19,6 +19,7 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="frontend/css/tooplate-style.css">
     <style>
+
         .team-thumb{
             margin-bottom: 30px;
         }
@@ -184,44 +185,23 @@
 
 
     <!-- HOME -->
-    <section id="home" class="slider" data-stellar-background-ratio="0.5">
+    <section id="home" class="slider">
         <div class="container">
             <div class="row">
-
-                <div class="owl-carousel owl-theme">
+                <div class="">
                     <div class="item item-first">
                         <div class="caption">
                             <div class="col-md-offset-1 col-md-10">
-                                <h3>Let's make your life happier</h3>
-                                <h1>Healthy Living</h1>
-                                <a href="#team" class="section-btn btn btn-default smoothScroll">Meet Our Doctors</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item item-second">
-                        <div class="caption">
-                            <div class="col-md-offset-1 col-md-10">
-                                <h3>Aenean luctus lobortis tellus</h3>
-                                <h1>New Lifestyle</h1>
-                                <a href="#about" class="section-btn btn btn-default btn-gray smoothScroll">More About
-                                    Us</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item item-third">
-                        <div class="caption">
-                            <div class="col-md-offset-1 col-md-10">
-                                <h3>Pellentesque nec libero nisi</h3>
-                                <h1>Your Health Benefits</h1>
-                                <a href="#news" class="section-btn btn btn-default btn-blue smoothScroll">Read
-                                    Stories</a>
+                                <h3>
+                                    ### Antrian ###
+                                </h3>
+                                <h1 id="antrianDipanggilHero">
+                                    Nomor Antrian
+                                </h1>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -360,6 +340,49 @@
     </footer>
 
     <!-- SCRIPTS -->
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script>
+        const socket = io("http://localhost:6001");
+    
+        // Pastikan koneksi ke server Socket.IO berhasil
+        socket.on("connect", () => {
+            console.log("Connected to Socket.IO server:", socket.id);
+        });
+    
+        // Mendengarkan event 'refresh:antrian' dari server Socket.IO
+        socket.on("refresh:antrian", (data) => {
+    
+            // Cari elemen hero dengan ID 'antrianDipanggilHero'
+            const antrianDipanggilHero = document.getElementById("antrianDipanggilHero");
+    
+
+            if (antrianDipanggilHero) {
+                // Update teks elemen berdasarkan status
+                switch (data.status) {
+                    case 'dilewati':
+                        antrianDipanggilHero.innerText = `Nomor ${data.no_antrian} - Dilewati`;
+                        break;
+                    case 'berlangsung':
+                        antrianDipanggilHero.innerText = `Nomor ${data.no_antrian} - Sedang Berlangsung`;
+                        break;
+                    default:
+                        antrianDipanggilHero.innerText = `Nomor ${data.no_antrian} - ${data.status}`;
+                }
+            } else {
+                console.warn("Elemen dengan ID 'antrianDipanggilHero' tidak ditemukan di DOM.");
+            }
+        });
+    
+        // Tangani koneksi error
+        socket.on("connect_error", (error) => {
+            console.error("Socket.IO Connection Error:", error);
+        });
+    
+        // Tangani disconnect
+        socket.on("disconnect", () => {
+            console.warn("Disconnected from Socket.IO server");
+        });
+    </script>
     <script src="frontend/js/jquery.js"></script>
     <script src="frontend/js/bootstrap.min.js"></script>
     <script src="frontend/js/jquery.sticky.js"></script>
@@ -368,6 +391,8 @@
     <script src="frontend/js/smoothscroll.js"></script>
     <script src="frontend/js/owl.carousel.min.js"></script>
     <script src="frontend/js/custom.js"></script>
+
+    
 
 </body>
 

@@ -32,6 +32,7 @@
 @endsection
 
 @push('after-script')
+
 <script>
 
     window.addEventListener("pageshow", function(event) {
@@ -114,5 +115,40 @@
             }
         });
     }
+</script>
+
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script>
+    const socket = io("http://localhost:6001");
+    
+        // Pastikan koneksi ke server Socket.IO berhasil
+        socket.on("connect", () => {
+            console.log("Connected to Socket.IO server:", socket.id);
+        });
+    
+        // Mendengarkan event 'refresh:antrian' dari server Socket.IO
+        socket.on("refresh:antrian", (data) => {
+    
+            // Cari elemen hero dengan ID 'antrianDipanggilHero'
+            const antrianDipanggilHero = document.getElementById("tb_rekam_medis");
+    
+
+            if (antrianDipanggilHero) {
+                // Update datatable ketika ada event 'refresh:antrian'
+                $('#tb_rekam_medis').DataTable().ajax.reload();
+            } else {
+                console.warn("Elemen dengan ID 'antrianDipanggilHero' tidak ditemukan di DOM.");
+            }
+        });
+    
+        // Tangani koneksi error
+        socket.on("connect_error", (error) => {
+            console.error("Socket.IO Connection Error:", error);
+        });
+    
+        // Tangani disconnect
+        socket.on("disconnect", () => {
+            console.warn("Disconnected from Socket.IO server");
+        });
 </script>
 @endpush

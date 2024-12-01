@@ -55,7 +55,7 @@ Route::prefix('petugas')
         // Custome route antrian
         Route::get('/antrian', [AntrianController::class, 'index'])->name('petugas.antrian.index');
         Route::put('/antrian/teruskan/{id}', [AntrianController::class, 'teruskan'])->name('petugas.antrian.teruskan');
-        Route::get('/antrian/lewati', [AntrianController::class, 'lewati'])->name('petugas.antrian.lewati');
+        Route::put('/antrian/lewati/{id}', [AntrianController::class, 'lewati'])->name('petugas.antrian.lewati');
         // Custome route antrian
 
         // Custom route pasien

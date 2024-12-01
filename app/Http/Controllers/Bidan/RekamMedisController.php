@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class RekamMedisController extends Controller
@@ -138,6 +139,15 @@ class RekamMedisController extends Controller
             $antrian = Antrian::where('pasien_id', $request->id_pasien)->first();
             $antrian->status = 'selesai';
             $antrian->save();
+
+            // Kirim data perubahan ke server WebSocket
+            $data = [
+                'no_antrian' => $antrian->no_antrian,
+                'status' => $antrian->status,
+                'posisi' => $antrian->posisi
+            ];
+
+            Http::post('http://localhost:6001/update-antrian', $data);
 
             DB::commit();
             
