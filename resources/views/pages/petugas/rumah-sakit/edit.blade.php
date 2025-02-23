@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Data Rumah sakit')
+@section('title', 'Edit Data Rumah sakit')
 
 @section('content')
     <div class="row row-sm">
@@ -20,7 +20,7 @@
             <div class="card bg-white border-0 rounded-3 mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-4">Tambah Data Rumah Sakit</h3>
+                        <h3 class="card-title mb-4">Edit Data Rumah Sakit</h3>
                     </div>
                     <form action="{{ route('rumah-sakit.update', $data->id_rumah_sakit) }}" method="POST">
                         @csrf

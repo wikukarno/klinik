@@ -147,7 +147,7 @@ class LayananController extends Controller
             DB::commit();
 
             toast('Data berhasil dihapus', 'success');
-
+            
             return to_route('layanan.index');
         } catch (\Exception $e) {
             DB::rollBack();

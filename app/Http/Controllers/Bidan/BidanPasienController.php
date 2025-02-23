@@ -17,6 +17,9 @@ class BidanPasienController extends Controller
             $query = Pasien::with('layanan')->where('status', 'selesai');
             return datatables()->of($query)
                 ->addIndexColumn()
+                ->editColumn('id_layanan', function ($item) {
+                    return $item->layanan->nama_layanan;
+                })
                 ->editColumn('harga_layanan', function ($item) {
                     return 'Rp ' . number_format($item->layanan->harga_layanan, 0, ',', '.');
                 })
